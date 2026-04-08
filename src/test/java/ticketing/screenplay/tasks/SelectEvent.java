@@ -40,6 +40,8 @@ public class SelectEvent {
         return Task.where("{0} selecciona el evento '" + titulo + "'",
                 WaitUntil.the(EventsPage.eventoPorTitulo(titulo), isVisible())
                          .forNoMoreThan(10).seconds(),
+                net.serenitybdd.screenplay.actions.Scroll.to(EventsPage.eventoPorTitulo(titulo)),
+                ticketing.screenplay.interactions.TakeABreath.of(1000),
                 Click.on(EventsPage.eventoPorTitulo(titulo))
         );
     }

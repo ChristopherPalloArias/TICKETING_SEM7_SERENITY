@@ -167,7 +167,7 @@
                 <executions>
                     <execution>
                         <id>serenity-reports</id>
-                        <phase>post-integration-test</phase>
+                        <phase>test</phase> <!-- Movido para que mvn clean test genere el reporte -->
                         <goals>
                             <goal>aggregate</goal>
                         </goals>

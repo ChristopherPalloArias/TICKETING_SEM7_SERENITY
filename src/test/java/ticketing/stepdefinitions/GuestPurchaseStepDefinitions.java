@@ -12,6 +12,7 @@ import ticketing.screenplay.questions.EventsListScreen;
 import ticketing.screenplay.questions.SuccessScreen;
 import ticketing.screenplay.questions.TicketScreen;
 import ticketing.screenplay.questions.TierAvailabilityScreen;
+import ticketing.screenplay.interactions.TakeABreath;
 import ticketing.screenplay.tasks.CompletePayment;
 import ticketing.screenplay.tasks.ContinueToPayment;
 import ticketing.screenplay.tasks.EnterEmail;
@@ -69,7 +70,8 @@ public class GuestPurchaseStepDefinitions {
     @Given("que {actor} navega a la cartelera de eventos")
     public void navegaALaCartelera(Actor actor) {
         actor.attemptsTo(
-                NavigateTo.laCartelera()
+                NavigateTo.laCartelera(),
+                TakeABreath.of(1500)
         );
     }
 
@@ -85,7 +87,8 @@ public class GuestPurchaseStepDefinitions {
     @When("{actor} selecciona el primer evento disponible")
     public void seleccionaElPrimerEvento(Actor actor) {
         actor.attemptsTo(
-                SelectEvent.elPrimeroDisponible()
+                SelectEvent.elPrimeroDisponible(),
+                TakeABreath.of(1500)
         );
     }
 
@@ -99,7 +102,8 @@ public class GuestPurchaseStepDefinitions {
     @When("{actor} selecciona el evento {string}")
     public void seleccionaElEvento(Actor actor, String titulo) {
         actor.attemptsTo(
-                SelectEvent.porTitulo(titulo)
+                SelectEvent.porTitulo(titulo),
+                TakeABreath.of(1500)
         );
     }
 
@@ -118,7 +122,8 @@ public class GuestPurchaseStepDefinitions {
     @And("{actor} elige el tier {string}")
     public void eligeElTier(Actor actor, String tierName) {
         actor.attemptsTo(
-                SelectTier.called(tierName)
+                SelectTier.called(tierName),
+                TakeABreath.of(1500)
         );
     }
 
@@ -134,7 +139,8 @@ public class GuestPurchaseStepDefinitions {
     @And("{actor} reserva su lugar")
     public void reservaSuLugar(Actor actor) {
         actor.attemptsTo(
-                ReserveTicket.now()
+                ReserveTicket.now(),
+                TakeABreath.of(1500)
         );
     }
 
@@ -154,7 +160,8 @@ public class GuestPurchaseStepDefinitions {
         // Ej: "marta.guest@example.com" → "marta.guest+20260408073749@example.com"
         String uniqueEmail = toUniqueEmail(email);
         actor.attemptsTo(
-                EnterEmail.withAddress(uniqueEmail)
+                EnterEmail.withAddress(uniqueEmail),
+                TakeABreath.of(1500)
         );
     }
 
@@ -185,7 +192,8 @@ public class GuestPurchaseStepDefinitions {
     @And("{actor} continúa hacia el pago")
     public void continuaHaciaElPago(Actor actor) {
         actor.attemptsTo(
-                ContinueToPayment.now()
+                ContinueToPayment.now(),
+                TakeABreath.of(1500)
         );
     }
 
@@ -202,7 +210,8 @@ public class GuestPurchaseStepDefinitions {
     @And("{actor} completa el pago simulado exitosamente")
     public void completaElPagoSimulado(Actor actor) {
         actor.attemptsTo(
-                CompletePayment.successfully()
+                CompletePayment.successfully(),
+                TakeABreath.of(1500)
         );
     }
 
@@ -215,7 +224,8 @@ public class GuestPurchaseStepDefinitions {
     @And("{actor} simula un pago rechazado")
     public void simulaUnPagoRechazado(Actor actor) {
         actor.attemptsTo(
-                CompletePayment.withFailure()
+                CompletePayment.withFailure(),
+                TakeABreath.of(1500)
         );
     }
 

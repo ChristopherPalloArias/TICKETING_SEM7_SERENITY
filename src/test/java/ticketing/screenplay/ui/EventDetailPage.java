@@ -46,6 +46,32 @@ public class EventDetailPage {
                   .locatedBy("//button[.//span[normalize-space()='Reservar']]");
 
     /**
+     * Tier deshabilitado: mismo patrón XPath pero restringido a
+     * div[@role='button' and @aria-disabled='true'].
+     *
+     * ── SUPUESTO DE DOM ────────────────────────────────────────────────────
+     * Se asume que el frontend marca un tier no disponible con aria-disabled="true"
+     * en el div[@role='button']. Esta es la convención WAI-ARIA estándar.
+     *
+     * VERIFICAR con devtools antes de ejecutar escenarios @requires-seed-data:
+     *   - Con un evento de stock=0 activo, inspeccionar el tier card.
+     *   - Si el atributo real es diferente (p.ej. clase CSS, data-attr),
+     *     actualizar el XPath de este método.
+     *
+     * Usado por: TierAvailabilityScreen.isTierUnavailable()
+     *
+     * @param tierName "GENERAL" | "VIP" | "EARLY_BIRD"
+     * @return Target XPath apuntando al tier deshabilitado
+     */
+    public static Target tierDeshabilitado(String tierName) {
+        String displayName = toDisplayName(tierName);
+        return Target.the("tier " + displayName + " deshabilitado")
+                     .locatedBy("//div[@role='button' and @aria-disabled='true']"
+                              + "//span[normalize-space()='" + displayName + "']"
+                              + "/ancestor::div[@role='button'][1]");
+    }
+
+    /**
      * Devuelve el Target del tier según el nombre recibido como parámetro Gherkin.
      * Convierte el nombre técnico del feature al texto visible real en el DOM.
      *

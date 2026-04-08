@@ -11,6 +11,7 @@ import ticketing.navigation.NavigateTo;
 import ticketing.screenplay.questions.EventsListScreen;
 import ticketing.screenplay.questions.SuccessScreen;
 import ticketing.screenplay.questions.TicketScreen;
+import ticketing.screenplay.questions.TierAvailabilityScreen;
 import ticketing.screenplay.tasks.CompletePayment;
 import ticketing.screenplay.tasks.ContinueToPayment;
 import ticketing.screenplay.tasks.EnterEmail;
@@ -18,6 +19,7 @@ import ticketing.screenplay.tasks.ReserveTicket;
 import ticketing.screenplay.tasks.SelectEvent;
 import ticketing.screenplay.tasks.SelectTier;
 import ticketing.screenplay.ui.ConfirmationPage;
+import ticketing.screenplay.ui.EventDetailPage;
 import ticketing.screenplay.ui.EventsPage;
 import ticketing.screenplay.ui.FailedPaymentPage;
 
@@ -434,5 +436,75 @@ public class GuestPurchaseStepDefinitions {
     public void noDeberiaVerElEarlyBirdComoTierActivo(Actor actor) {
         // TODO: implementar con selector auditado de estado "vencido"
         actor.remember("wip", "early-bird-inactivo");
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    // HU-03 – Disponibilidad de tiers (@requires-seed-data)
+    // ──────────────────────────────────────────────────────────────────────
+
+    /**
+     * Valida que un tier se muestra visualmente como no disponible (deshabilitado).
+     *
+     * Espera explícita usando el selector base del tier (que encuentra el elemento
+     * aunque esté deshabilitado, ya que aria-disabled no afecta la visibilidad CSS).
+     * La assertion delega en TierAvailabilityScreen.isTierUnavailable() que verifica
+     * la presencia del atributo aria-disabled="true" en el tier card.
+     *
+     * Supuesto DOM verificar antes de activar: aria-disabled="true" en div[@role='button'].
+     * Si el selector no coincide, actualizar EventDetailPage.tierDeshabilitado().
+     *
+     * @param actor    el actor
+     * @param tierName nombre técnico del tier ("GENERAL", "VIP", "EARLY_BIRD")
+     */
+    @Then("{actor} debería ver el tier {string} marcado como no disponible")
+    public void deberiaVerElTierComoNoDisponible(Actor actor, String tierName) {
+        actor.attemptsTo(
+                WaitUntil.the(EventDetailPage.tierButton(tierName), isVisible())
+                         .forNoMoreThan(10).seconds(),
+                Ensure.that(TierAvailabilityScreen.isTierUnavailable(tierName)).isTrue()
+        );
+    }
+
+    /**
+     * Valida que el tier sigue en estado deshabilitado (no se habilitó como efecto
+     * colateral de la espera del paso anterior).
+     *
+     * Complementa a {@link #deberiaVerElTierComoNoDisponible} confirmando que el
+     * estado no disponible persiste. No intenta hacer clic en el tier.
+     *
+     * @param actor    el actor
+     * @param tierName nombre técnico del tier ("GENERAL", "VIP", "EARLY_BIRD")
+     */
+    @And("{actor} no debería poder seleccionar el tier {string} para comprar")
+    public void noDeberiaPoderSeleccionarElTierParaComprar(Actor actor, String tierName) {
+        // La assertion anterior ya verificó el estado. Este paso confirma
+        // que el estado "no disponible" persiste sin necesitar nueva espera.
+        actor.attemptsTo(
+                Ensure.that(TierAvailabilityScreen.isTierUnavailable(tierName)).isTrue()
+        );
+    }
+
+    /**
+     * Valida que un tier no está disponible para selección, ya sea porque está
+     * deshabilitado (aria-disabled="true") o porque está ausente del DOM.
+     *
+     * Cubre ambas variantes posibles de comportamiento del frontend para tiers
+     * no activos (p.ej. Early Bird vencido):
+     *   - El tier se muestra pero con aria-disabled="true"
+     *   - El tier se oculta completamente del DOM
+     *
+     * La espera explícita usa TIER_GENERAL como proxy de "página de detalle cargada",
+     * ya que cualquier evento activo expone al menos un tier habilitado.
+     *
+     * @param actor    el actor
+     * @param tierName nombre técnico del tier ("GENERAL", "VIP", "EARLY_BIRD")
+     */
+    @Then("{actor} no debería ver el tier {string} disponible para selección")
+    public void noDeberiaVerElTierDisponibleParaSeleccion(Actor actor, String tierName) {
+        actor.attemptsTo(
+                WaitUntil.the(EventDetailPage.TIER_GENERAL, isVisible())
+                         .forNoMoreThan(10).seconds(),
+                Ensure.that(TierAvailabilityScreen.isTierUnavailableOrAbsent(tierName)).isTrue()
+        );
     }
 }

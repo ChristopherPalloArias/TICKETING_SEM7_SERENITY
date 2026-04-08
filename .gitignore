@@ -12,6 +12,19 @@ buildNumber.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
+# ─── Serenity BDD — artefactos generados ──────────────────────────────────────
+# build/ contiene el timeline HTML generado por SerenityReporterParallel.
+# Es un artefacto de ejecución, no código fuente. No debe subirse al repo.
+build/
+serenity-reports/
+
+# ─── Logs y evidencias generadas automáticamente ─────────────────────────────
+# Archivos .txt de log de ejecución generados con tee (ej. serenity_execution_*.txt).
+# Si quieres conservar serenity_evidence.txt como evidencia permanente,
+# añade una excepción explícita: !serenity_evidence.txt
+serenity_execution_*.txt
+*.log
+
 # ─── IDE ──────────────────────────────────────────────────────────────────────
 .idea/
 *.iml

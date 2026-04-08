@@ -1,0 +1,65 @@
+name: Deploy Serenity Report to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"        # Solo se dispara cuando se actualizan los reportes en docs/
+  workflow_dispatch:     # También disparable manualmente desde Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Verificar y preparar el reporte Serenity
+        run: |
+          # El reporte Serenity se genera localmente con: mvn clean test
+          # Luego se copia a docs/ con: cp -r target/site/serenity/* docs/
+          # Este workflow despliega lo que esté en docs/
+          if [ ! -d "docs" ] || [ -z "$(ls -A docs 2>/dev/null)" ]; then
+            echo "❌ La carpeta docs/ está vacía o no existe."
+            echo ""
+            echo "Para generar y publicar el reporte Serenity:"
+            echo "  1. Asegúrate de que el frontend corre en http://localhost:5173 (Docker)"
+            echo "  2. Ejecuta: mvn clean test"
+            echo "  3. Copia el reporte: mkdir -p docs && cp -r target/site/serenity/. docs/"
+            echo "  4. Commit y push: git add docs/ && git commit -m 'docs: update Serenity report' && git push"
+            exit 1
+          fi
+
+          # El reporte Serenity genera index.html en la raíz — verificar
+          if [ ! -f "docs/index.html" ]; then
+            echo "⚠️  docs/index.html no encontrado. Verifica que copiaste target/site/serenity/ completo."
+            exit 1
+          fi
+
+          echo "✅ Reporte Serenity listo para despliegue."
+          echo "   Archivos encontrados: $(find docs -type f | wc -l)"
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir artifact de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      - name: Desplegar a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -131,9 +131,8 @@
                     <systemPropertyVariables>
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
-                    <parallel>classes</parallel>
-                    <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <!-- Paralelismo DESACTIVADO: ejecución secuencial, 1 escenario a la vez -->
+                    <!-- Para activar en el futuro: <parallel>classes</parallel> + <useUnlimitedThreads>true</useUnlimitedThreads> -->
                 </configuration>
                 <executions>
                     <execution>

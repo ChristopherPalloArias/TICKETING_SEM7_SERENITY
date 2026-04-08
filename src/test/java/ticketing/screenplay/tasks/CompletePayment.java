@@ -9,18 +9,19 @@ import ticketing.screenplay.ui.PaymentPage;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 
 /**
- * Tarea Screenplay: simular pago exitoso mediante el mock de E2E.
+ * Tarea Screenplay: interactuar con los botones de pago simulado.
  *
- * Hace clic en [data-testid="mock-payment-success"].
- * Este botón sólo está disponible cuando el frontend se ejecuta con:
- *   npm run dev:e2e
+ * Provee dos variantes:
+ *   - {@link #successfully()} → simula pago aprobado
+ *   - {@link #withFailure()}  → simula pago rechazado
  *
- * NO representa un pago real. Es exclusivo para automatización en modo E2E.
+ * Ambos botones son visibles solo en la pantalla de pago mock del frontend.
+ * No representan pagos reales. El selector es XPath por texto visible.
  */
 public class CompletePayment {
 
     /**
-     * Devuelve la tarea que simula el pago exitoso.
+     * Simula un pago exitoso haciendo clic en "Simular Pago Exitoso".
      *
      * @return Performable ejecutable por un actor
      */
@@ -29,6 +30,20 @@ public class CompletePayment {
                 WaitUntil.the(PaymentPage.MOCK_PAYMENT_SUCCESS_BTN, isClickable())
                          .forNoMoreThan(10).seconds(),
                 Click.on(PaymentPage.MOCK_PAYMENT_SUCCESS_BTN)
+        );
+    }
+
+    /**
+     * Simula un pago rechazado haciendo clic en "Simular Pago Rechazado".
+     * Tras el clic el frontend navega a la pantalla de pago declinado.
+     *
+     * @return Performable ejecutable por un actor
+     */
+    public static Performable withFailure() {
+        return Task.where("{0} simula un pago rechazado",
+                WaitUntil.the(PaymentPage.MOCK_PAYMENT_FAILURE_BTN, isClickable())
+                         .forNoMoreThan(10).seconds(),
+                Click.on(PaymentPage.MOCK_PAYMENT_FAILURE_BTN)
         );
     }
 }

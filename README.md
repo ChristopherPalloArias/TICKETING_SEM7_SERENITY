@@ -33,11 +33,9 @@
 
 > ⚠️ **ATENCIÓN EVALUADOR:** Todos los insumos obligatorios exigidos sobre la validación funcional UI del comprador, el Screenplay Pattern y la estrategia multicapa se encuentran consolidados y listos para su auditoría.
 >
-> 🔗 **[👉 HAZ CLIC AQUÍ PARA VER EL INFORME OFICIAL DE SERENITY BDD](https://christopherpalloarias.github.io/TICKETING_SEM7_SERENITY/)** *(disponible tras el despliegue GitHub Pages)*
-
+> 🔗 **[👉 HAZ CLIC AQUÍ PARA VER EL INFORME OFICIAL DE SERENITY BDD](https://christopherpalloarias.github.io/TICKETING_SEM7_SERENITY/)**
 - 📄 **Test Plan Oficial:** [`TEST_PLAN.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_PLAN.md) *(Estrategia multicapa documentada: Serenity + Karate + k6 + SQL).*
 - 📋 **Matriz de Test Cases:** [`TEST_CASES.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_CASES.md) *(29 casos del ciclo MVP con trazabilidad completa.)*
-- 📄 **Plan de pruebas de esta suite:** [`TEST_PLAN.md`](./TEST_PLAN.md) *(Estrategia específica de la capa UI: flujos priorizados, ROI, exclusiones justificadas.)*
 - 📊 **Evidencia de ejecución cruda:** [`serenity_evidence.txt`](./serenity_evidence.txt) *(Log completo de la última ejecución: 9 tests, 0 fallos, BUILD SUCCESS.)*
 - 🚀 **Feature files:** Carpeta [`src/test/resources/features/ticketing/`](./src/test/resources/features/ticketing/)
 
@@ -393,6 +391,3 @@ Esto funciona correctamente tanto si el elemento no existe en el DOM (caso esper
 
 ---
 
-## 🤖 Sobre la Orquestación ASDD
-
-Para más detalle sobre las directrices de Calidad Preventiva impulsadas por Especificaciones controladas por Agente AI que enmarcan la evolución del proyecto, consultar la bitácora madre interna en [`.github/README_ASDD.md`](./.github/README_ASDD.md).

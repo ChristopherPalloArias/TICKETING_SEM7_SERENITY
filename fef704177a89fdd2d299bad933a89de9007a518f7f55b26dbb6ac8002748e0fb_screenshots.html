@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Screenshots</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+<script>
+    jQuery.fn.dataTable.ext.type.order['time-elapsed-dhms-pre'] = function(data) {
+
+        var matches = data.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)/i);
+        var multipliers = {
+            ms: 1,
+            s: 1000,
+            m: 60000,
+            h: 3600000,
+            d: 86400000
+        };
+
+        if (matches) {
+            var multiplier = multipliers[matches[2].toLowerCase()];
+            return parseFloat(matches[1]) * multiplier;
+        } else {
+            return -1;
+        };
+    };
+</script>
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/>
+<!--CHART.JS-->
+<script src="chartjs/chart.js"></script>
+<script src="chartjs/chartjs-plugin-datalabels@2.0.0.min.js"></script>
+<script src="chartjs/patternomaly.min.js"></script>
+<script>
+    // Register the plugin to all charts:
+    Chart.register(ChartDataLabels);
+</script>
+
+    <!-- Swiper.js local styles and script -->
+    <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
+    <script src="swiper/swiper-bundle.min.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const startIndex = parseInt(urlParams.get("screenshot")) || 0;
+
+            new Swiper('.swiper', {
+                initialSlide: startIndex,
+                effect: 'fade',
+                speed: 200,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + "</span>";
+                    },
+                    dynamicBullets: true,
+                    dynamicMainBullets: 3  // Shows 3 main bullets + 2 smaller ones on sides
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .swiper {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: #000;
+            opacity: 1;
+            background: lightgrey;
+        }
+
+        .swiper-pagination-bullet-active {
+            color: #fff;
+            background: #007aff;
+        }
+    </style>
+</head>
+
+<body>
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">Ticketing MVP - Automatizacion Funcional UI</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+                <a href="index.html">Home</a>
+                > <span class="truncate-40"><a
+                    href="1c5bbe642f1d94933e49e11e611badcd8638104759861d928e72a1e1ea6407da.html">Ticket Visibility</a></span>
+                > <span class="truncate-60"><a
+                    href="fef704177a89fdd2d299bad933a89de9007a518f7f55b26dbb6ac8002748e0fb.html">Invitado con pago rechazado no visualiza el ticket confirmado </a></span>
+                > Screenshots
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#"><i class="bi bi-journal-check"></i> Overall Test Results</a>
+        </li>
+        <li >
+            <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="7ea0a5e2d679b9deeda9910ae4a9bcd3a281e0d908303a9e16e486103e98880c.html"><i class="bi bi-chat-text"></i> Capabilities</a>
+        </li>
+        <li >
+            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 08-04-2026 17:34</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+
+    <div id="contentbody">
+        <div class="titlebar">
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td>
+                            <div>
+                                <h3 class="discreet-story-header">
+                                    <i class="fs-2 bi bi-chat-left-quote large-icon"></i>
+                                    <span class="story-header-title">Visibilidad Del Ticket Confirmado Tras El Proceso De Compra </span>
+                                    <span class="badge tag-badge" style="">Feature</span>
+                                </h3>
+
+                                <div class="discreet-requirement-narrative-title">
+                                Como visitante anónimo del sitio<br />
+Quiero ver mi ticket de compra confirmado cuando el pago fue aprobado<br />
+Y no ver ningún ticket cuando el pago fue rechazado<br />
+Para tener certeza clara del resultado de mi transacción
+                                </div>
+                            </div>
+
+                        </td>
+                        <td valign="top" align="right">
+                            <p class="tag">
+                                <span class="badge tag-badge" style="background:default;"
+                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="8f0f2af3a6d9c7e814e8e676a88da6da40eb09fc067103cea2d9c44adc01fa61.html">Ticket-Visibility
+                                </a>
+                                </span>
+                            </p>
+                            <p class="tag">
+                                <span class="badge tag-badge" style="background:default;"
+                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="34658a1663fcf042bd7acb3325affbe4e647c8acd84d0228be2f52e1381e61b9.html">10 To 30 Seconds
+                                        (Duration)
+                                </a>
+                                </span>
+                            </p>
+                            <p class="tag">
+                                <span class="badge tag-badge" style="background:default;"
+                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="79d51febb431c8134fb68d6de7b049681254e69133b33096dd23fcc343cfa57f.html">Mvp
+                                </a>
+                                </span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="story-title">
+                <table class="outcome-header">
+                    <tr>
+                        <td colspan="2" class="test-title-bar">
+                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
+                            <span class="test-case-title">
+                                <span class="success-color">Invitado con pago rechazado no visualiza el ticket confirmado
+                                    <span class="related-issue-title"></span>
+                                </span>
+                            </span>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+
+
+    <div id="beforetable"></div>
+    <div id="contenttilttle">
+    <!-- Swiper Carousel -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="c7a2563da11bb3f56bd58ea62bffaf8eaa06c626011282548304ecdcb708decf.png" title=" Given que Marta es un invitado que desea comprar una entrada" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="bc3bf3f5871ed1eaac5f4ed29bf9cd329b0fae10af1b445dc586cc3dca38760c.png" title=" Given que Marta navega a la cartelera de eventos" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="bc3bf3f5871ed1eaac5f4ed29bf9cd329b0fae10af1b445dc586cc3dca38760c.png" title=" Marta navega a la cartelera de eventos" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="bc3bf3f5871ed1eaac5f4ed29bf9cd329b0fae10af1b445dc586cc3dca38760c.png" title=" Marta opens the browser at http://localhost:5173/eventos" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="bc3bf3f5871ed1eaac5f4ed29bf9cd329b0fae10af1b445dc586cc3dca38760c.png" title=" Marta navega a la cartelera de eventos (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="ef74fb8b324c32bcc8b3c7fab4d6f23e07737e608befaef1b4330ec1b4cdf713.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="ef74fb8b324c32bcc8b3c7fab4d6f23e07737e608befaef1b4330ec1b4cdf713.png" title=" Given que Marta navega a la cartelera de eventos (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4fb8b2fd93fa006455c2a8a489be659b181fddfca5f31bcf437eb1b3ccccc292.png" title=" When Marta selecciona el evento &amp;quot;The Phantom&#39;s Echo&amp;quot;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4fb8b2fd93fa006455c2a8a489be659b181fddfca5f31bcf437eb1b3ccccc292.png" title=" Marta selecciona el evento &#39;The Phantom&#39;s Echo&#39;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="4fb8b2fd93fa006455c2a8a489be659b181fddfca5f31bcf437eb1b3ccccc292.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="8cd9f46af914ec535d7e2b179529cfb612b6e97cabe7b2df04b6a2c5d77564e2.png" title=" Marta clicks on tarjeta del evento &#39;The Phantom&#39;s Echo&#39;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="8cd9f46af914ec535d7e2b179529cfb612b6e97cabe7b2df04b6a2c5d77564e2.png" title=" Marta selecciona el evento &#39;The Phantom&#39;s Echo&#39; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="048f0dd94e571fd5c85bc83476ad5c097c612be6cd751f445e8b964cde2f9a0b.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="048f0dd94e571fd5c85bc83476ad5c097c612be6cd751f445e8b964cde2f9a0b.png" title=" When Marta selecciona el evento &amp;quot;The Phantom&#39;s Echo&amp;quot; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="7be3d0704ee25bdd5b6c0acea06c55324d48a9d6f9c3248b87d73808a1ff2064.png" title=" And Marta elige el tier &amp;quot;GENERAL&amp;quot;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="7be3d0704ee25bdd5b6c0acea06c55324d48a9d6f9c3248b87d73808a1ff2064.png" title=" Marta elige el tier &#39;GENERAL&#39;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="7be3d0704ee25bdd5b6c0acea06c55324d48a9d6f9c3248b87d73808a1ff2064.png" title=" Marta clicks on tier General" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="7be3d0704ee25bdd5b6c0acea06c55324d48a9d6f9c3248b87d73808a1ff2064.png" title=" Marta elige el tier &#39;GENERAL&#39; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="681d4f2b042b5104ef0f71d84fb87a74e766892d7d7221b4d1e7a50c2905bbac.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="681d4f2b042b5104ef0f71d84fb87a74e766892d7d7221b4d1e7a50c2905bbac.png" title=" And Marta elige el tier &amp;quot;GENERAL&amp;quot; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="0d68bcc05aefb0d5da465e9871b3b9ce414c7d2302937ddd3e52c07b9d0d479d.png" title=" And Marta reserva su lugar" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="0d68bcc05aefb0d5da465e9871b3b9ce414c7d2302937ddd3e52c07b9d0d479d.png" title=" Marta reserva su lugar haciendo clic en &#39;Reservar&#39;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="0d68bcc05aefb0d5da465e9871b3b9ce414c7d2302937ddd3e52c07b9d0d479d.png" title=" Marta clicks on bot&amp;oacute;n Reservar" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="0d68bcc05aefb0d5da465e9871b3b9ce414c7d2302937ddd3e52c07b9d0d479d.png" title=" Marta reserva su lugar haciendo clic en &#39;Reservar&#39; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="cc171ca252ea2f2ed7aaeafc35c7303f038c44820f03356d7ddeca5f48ba1adb.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="cc171ca252ea2f2ed7aaeafc35c7303f038c44820f03356d7ddeca5f48ba1adb.png" title=" And Marta reserva su lugar (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="cc171ca252ea2f2ed7aaeafc35c7303f038c44820f03356d7ddeca5f48ba1adb.png" title=" And Marta ingresa su correo &amp;quot;marta.guest@example.com&amp;quot;" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="cc171ca252ea2f2ed7aaeafc35c7303f038c44820f03356d7ddeca5f48ba1adb.png" title=" Marta ingresa el correo &#39;marta.guest+20260408173408@example.com&#39; en el checkout" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="cc171ca252ea2f2ed7aaeafc35c7303f038c44820f03356d7ddeca5f48ba1adb.png" title=" Marta clears field campo email del invitado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="1a03d96691fe139bed66220411fa47a0d7dcf6345935c304e0f0f33bb5b15391.png" title=" Marta enters &#39;marta.guest+20260408173408@example.com&#39; into campo email del invitado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="1a03d96691fe139bed66220411fa47a0d7dcf6345935c304e0f0f33bb5b15391.png" title=" Marta ingresa el correo &#39;marta.guest+20260408173408@example.com&#39; en el checkout (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="eb728a68ea540873e339feee1aa6be21dd346d3fe059eac25af5ac8cf07602f8.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="eb728a68ea540873e339feee1aa6be21dd346d3fe059eac25af5ac8cf07602f8.png" title=" And Marta ingresa su correo &amp;quot;marta.guest@example.com&amp;quot; (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2280da812a180f7da36424fce8e0ac6556a3d30f847f29f594eff0a0b1bf2695.png" title=" And Marta contin&amp;uacute;a hacia el pago" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2280da812a180f7da36424fce8e0ac6556a3d30f847f29f594eff0a0b1bf2695.png" title=" Marta contin&amp;uacute;a hacia el pago" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2280da812a180f7da36424fce8e0ac6556a3d30f847f29f594eff0a0b1bf2695.png" title=" Marta clicks on bot&amp;oacute;n continuar al pago" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2280da812a180f7da36424fce8e0ac6556a3d30f847f29f594eff0a0b1bf2695.png" title=" Marta contin&amp;uacute;a hacia el pago (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2ff93e177a9fafc570e4198cc7a58c352cab3033290b60c96a281d915b87a086.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="2ff93e177a9fafc570e4198cc7a58c352cab3033290b60c96a281d915b87a086.png" title=" And Marta contin&amp;uacute;a hacia el pago (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="981957be5cf3f9e4832e229fac7897b9c759dad48732d912f83b1291fb68a125.png" title=" And Marta simula un pago rechazado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="981957be5cf3f9e4832e229fac7897b9c759dad48732d912f83b1291fb68a125.png" title=" Marta simula un pago rechazado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="981957be5cf3f9e4832e229fac7897b9c759dad48732d912f83b1291fb68a125.png" title=" Marta clicks on bot&amp;oacute;n simular pago rechazado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="981957be5cf3f9e4832e229fac7897b9c759dad48732d912f83b1291fb68a125.png" title=" Marta simula un pago rechazado (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="582e57206b4d99d164af95d1416ab80beccf7f4eafda44e662d1b35a4754efba.png" title=" Marta take a breath" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="582e57206b4d99d164af95d1416ab80beccf7f4eafda44e662d1b35a4754efba.png" title=" And Marta simula un pago rechazado (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="582e57206b4d99d164af95d1416ab80beccf7f4eafda44e662d1b35a4754efba.png" title=" Then Marta deber&amp;iacute;a ver la pantalla de pago rechazado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="582e57206b4d99d164af95d1416ab80beccf7f4eafda44e662d1b35a4754efba.png" title=" Marta should see t&amp;iacute;tulo de pago declinado that is displayed" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="582e57206b4d99d164af95d1416ab80beccf7f4eafda44e662d1b35a4754efba.png" title=" Then Marta deber&amp;iacute;a ver la pantalla de pago rechazado (completed)" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="264fc76d21cd8cdaeeee888c8c5ec9093e39955c1e7e5e88ec96b88178e508cb.png" title=" And Marta no deber&amp;iacute;a ver ning&amp;uacute;n ticket confirmado" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="264fc76d21cd8cdaeeee888c8c5ec9093e39955c1e7e5e88ec96b88178e508cb.png" title=" Marta should see  that is true" width="0" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="264fc76d21cd8cdaeeee888c8c5ec9093e39955c1e7e5e88ec96b88178e508cb.png" title=" And Marta no debería ver ningún ticket confirmado (completed): &lt;span class=&#39;success-color&#39;&gt;SUCCESS&lt;/span&gt;" width="0" />
+                </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<div id="beforefooter"></div>
+<div id="bottomfooter">
+    <span class="version">Serenity BDD version 5.3.8</span>
+</div>
+</body>
+</html>

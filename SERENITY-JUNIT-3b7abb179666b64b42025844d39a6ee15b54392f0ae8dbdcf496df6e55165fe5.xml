@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Compra exitosa de entrada como invitado" skipped="0" tests="3" time="42.7" timestamp="2026-04-08 05:32:49"><testcase name="Invitado completa el flujo de compra exitosamente de principio a fin"/><testcase name="Invitado puede elegir distintos tiers de precio"/></testsuite>

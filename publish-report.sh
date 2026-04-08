@@ -49,39 +49,32 @@ ARCHIVO_COUNT=$(find "$REPORT_SRC" -type f | wc -l)
 echo "   ✅ Reporte generado: $ARCHIVO_COUNT archivos en $REPORT_SRC"
 echo ""
 
-# ── Paso 3: Publicar en branch gh-pages usando worktree ───────────────────
+# ── Paso 3: Publicar en branch gh-pages via git init en dir temporal ──────────
 echo "▶ Paso 3/3: Publicando en branch '$BRANCH_PAGES'..."
 
-# Crear o actualizar el branch gh-pages via worktree (sin cambiar el branch actual)
-WORKTREE_DIR=$(mktemp -d)
-trap "git worktree remove --force '$WORKTREE_DIR' 2>/dev/null; rm -rf '$WORKTREE_DIR'" EXIT
-
-if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH_PAGES"; then
-    git fetch origin "$BRANCH_PAGES"
-    git worktree add "$WORKTREE_DIR" "$BRANCH_PAGES" 2>/dev/null \
-      || git worktree add "$WORKTREE_DIR" "origin/$BRANCH_PAGES"
-else
-    # Primera vez: crear branch huérfano
-    git worktree add --orphan -b "$BRANCH_PAGES" "$WORKTREE_DIR"
-fi
-
-# Limpiar el worktree y copiar el nuevo reporte
-cd "$WORKTREE_DIR"
-git rm -rf . --quiet 2>/dev/null || true
-cp -r "$REPORT_SRC/." .
-
-# Commit y push
+ORIGIN_URL=$(git remote get-url origin)
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+
+# Directorio temporal limpio para el commit de deploy
+DEPLOY_DIR=$(mktemp -d)
+trap "rm -rf '$DEPLOY_DIR'" EXIT
+
+cp -r "$REPORT_SRC/." "$DEPLOY_DIR/"
+
+cd "$DEPLOY_DIR"
+git init -q
+git checkout -q -b "$BRANCH_PAGES"
 git add -A
+
 if git diff --staged --quiet; then
-    echo "   ℹ️  Sin cambios en el reporte. No se hace commit."
+    echo "   ℹ️  Sin cambios en el reporte. No se hace push."
 else
-    git commit -m "deploy: Serenity BDD report — $TIMESTAMP
+    git commit -q -m "deploy: Serenity BDD report — $TIMESTAMP
 
 Tests run: 9, Failures: 0, Errors: 0
 Coverage: HU-03 · HU-04 · HU-07
 Environment: http://localhost:5173"
-    git push origin "$BRANCH_PAGES" --force
+    git push "$ORIGIN_URL" "$BRANCH_PAGES" --force -q
     echo "   ✅ Reporte publicado en branch '$BRANCH_PAGES'"
 fi
 

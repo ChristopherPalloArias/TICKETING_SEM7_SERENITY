@@ -1,433 +1,398 @@
-# Ticketing MVP — Automatización Funcional UI (Serenity BDD)
+<div align="center">
 
-> Automatización funcional E2E de la UI del comprador para el proyecto **Ticketing MVP** (venta de entradas de teatro).  
-> Stack: Java · Serenity BDD · Cucumber · Screenplay Pattern · Maven · Chrome
+# 🚀 TICKETING_MVP_UI_TEST
+
+### Taller Semana 7: Expectativa vs. Realidad — Ejecución Ágil, MVP y Estrategia de Pruebas
+
+**Rol / Líder QA:** Christopher Ismael Pallo Arias  
+**Proyecto:** Construcción del Ticketing MVP real y su Certificación por Micro-Sprints (Fase UI — SerenityBDD)  
+**Objetivo:** Vivir "el choque con la realidad" y certificar como QA el MVP funcional construido por DEV. Automatizar los flujos del comprador desde el navegador real usando el **Screenplay Pattern** de SerenityBDD + Cucumber, garantizando que la experiencia de compra sea correcta, estable y verificable de forma reproducible.
+
+<br />
+
+### 🛠️ Technology Stack
+
+**Functional UI Testing Framework**
+<br />
+<img src="https://img.shields.io/badge/Serenity_BDD-5.3.8-009CDE?style=for-the-badge&logo=java&logoColor=white" alt="Serenity BDD" />
+<img src="https://img.shields.io/badge/Cucumber-7.34.2-23D96C?style=for-the-badge&logo=cucumber&logoColor=white" alt="Cucumber JVM" />
+<img src="https://img.shields.io/badge/Java_17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17" />
+<img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white" alt="Maven" />
+<img src="https://img.shields.io/badge/Chrome-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chrome" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+<br />
+<a href="https://skillicons.dev">
+  <img src="https://skillicons.dev/icons?i=java,github,docker" alt="Automation Stack" />
+</a>
+
+</div>
 
 ---
 
-## Índice
+## 📌 Panel de Entrega y Resultados Formales
 
-1. [Propósito](#propósito)
-2. [Posición en la estrategia de calidad](#posición-en-la-estrategia-de-calidad)
-3. [Stack técnico](#stack-técnico)
-4. [Prerrequisitos](#prerrequisitos)
-5. [Cómo levantar el frontend](#cómo-levantar-el-frontend)
-6. [Estructura del proyecto](#estructura-del-proyecto)
-7. [Ejecución de la suite](#ejecución-de-la-suite)
-8. [Parametrización de URL base](#parametrización-de-url-base)
-9. [Cobertura actual](#cobertura-actual)
-10. [Diseño de la automatización](#diseño-de-la-automatización)
-11. [Reportes Serenity](#reportes-serenity)
-12. [Limitaciones actuales y próximos pasos](#limitaciones-actuales-y-próximos-pasos)
-13. [Qué no debe incluirse en el ZIP de entrega](#qué-no-debe-incluirse-en-el-zip-de-entrega)
+> ⚠️ **ATENCIÓN EVALUADOR:** Todos los insumos obligatorios exigidos sobre la validación funcional UI del comprador, el Screenplay Pattern y la estrategia multicapa se encuentran consolidados y listos para su auditoría.
+>
+> 🔗 **[👉 HAZ CLIC AQUÍ PARA VER EL INFORME OFICIAL DE SERENITY BDD](https://christopherpalloarias.github.io/TICKETING_SEM7_SERENITY/)** *(disponible tras el despliegue GitHub Pages)*
+
+- 📄 **Test Plan Oficial:** [`TEST_PLAN.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_PLAN.md) *(Estrategia multicapa documentada: Serenity + Karate + k6 + SQL).*
+- 📋 **Matriz de Test Cases:** [`TEST_CASES.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_CASES.md) *(29 casos del ciclo MVP con trazabilidad completa.)*
+- 📄 **Plan de pruebas de esta suite:** [`TEST_PLAN.md`](./TEST_PLAN.md) *(Estrategia específica de la capa UI: flujos priorizados, ROI, exclusiones justificadas.)*
+- 📊 **Evidencia de ejecución cruda:** [`serenity_evidence.txt`](./serenity_evidence.txt) *(Log completo de la última ejecución: 9 tests, 0 fallos, BUILD SUCCESS.)*
+- 🚀 **Feature files:** Carpeta [`src/test/resources/features/ticketing/`](./src/test/resources/features/ticketing/)
 
 ---
 
-## Propósito
+## 📋 Tabla de Contenidos
 
-Este repositorio implementa la **automatización funcional de la interfaz de usuario** del Ticketing MVP.  
-Los tests validan los flujos del comprador anónimo (guest) desde el navegador, ejerciendo la UI de extremo a extremo:
+1. [Contexto del Proyecto: El Choque con la Realidad](#-contexto-del-proyecto-el-choque-con-la-realidad)
+2. [Resultados de Ejecución](#-resultados-de-ejecución)
+3. [Arquitectura y Estructura del Framework](#️-arquitectura-y-estructura-del-framework)
+4. [Instrucciones de Clonado y Setup de Backend](#-instrucciones-de-clonado-y-setup-de-backend)
+5. [Ejecución de las Pruebas](#️-ejecución-de-las-pruebas)
+6. [Datos de Prueba y Seed Data](#-datos-de-prueba-y-seed-data)
+7. [Consideraciones Técnicas y Retos Avanzados Resueltos](#-consideraciones-técnicas-y-retos-avanzados-resueltos)
+
+---
+
+## 🎯 Contexto del Proyecto: El Choque con la Realidad
+
+Este repositorio corresponde a la certificación funcional UI (**SerenityBDD + Cucumber**) dentro de la **Fase 3: Estrategia de Calidad** exigida para el Taller 7. Tras diseñar la utopía en la Semana 6, nuestro objetivo de equipo fue construir y testear las piezas críticas seleccionadas del Backlog para entregar un **MVP funcional y valioso**.
+
+Mientras DEV implementaba y lidiaba con la curva real de los Story Points mediante *micro-sprints* iterativos de 2 días, desde el rol de QA se redactó e impuso la arquitectura formal de calidad alojada en el repositorio de Producto (`PRD_BACKLOG`): [`TEST_PLAN.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_PLAN.md) y [`TEST_CASES.md`](https://github.com/ChristopherPalloArias/PRD_BACKLOG/blob/main/TEST_CASES.md).
+
+Esta suite ejerce la validación funcional de los flujos del **comprador anónimo (guest)** que son observables y verificables desde el navegador real. Se priorizó la cobertura de los escenarios de mayor valor para el usuario final:
+
+- **HU-03 — Visualización de eventos y disponibilidad:** cartelera con eventos activos, tier agotado marcado visualmente como no disponible, Early Bird vencido oculto o deshabilitado.
+- **HU-04 — Reserva y compra con pago simulado:** flujo completo del comprador desde cartelera hasta confirmación, incluyendo los caminos de pago exitoso y pago rechazado.
+- **HU-07 — Ticket confirmado:** presencia del ticket tras compra exitosa y su ausencia tras pago rechazado.
+
+---
+
+## ✅ Resultados de Ejecución
 
 ```
-cartelera → selección de evento → selección de tier → checkout → pago simulado → confirmación o rechazo
-```
-
-El repositorio **no reemplaza** ni duplica otras capas de calidad del proyecto; es un componente independiente dentro de una estrategia multicapa.
-
-> **Alcance de capa:** Serenity cubre la **capa UI funcional priorizada del comprador** — lo que solo es observable y verificable desde el navegador. La validación exhaustiva de API, reglas de negocio internas y lógica de backend corresponde a **Karate**. Las pruebas de rendimiento bajo carga concurrente corresponden a **k6**.
-
----
-
-## Posición en la estrategia de calidad
-
-| Capa                                               | Herramienta        | Repositorio   |
-|----------------------------------------------------|--------------------|---------------|
-| Funcional UI — flujos prioritarios del comprador   | **Serenity BDD**   | *este repo*   |
-| API / Contrato / Lógica de negocio backend (validación exhaustiva) | Karate DSL | repo separado |
-| Rendimiento bajo carga concurrente                 | k6                 | repo separado |
-| Consistencia de datos                              | SQL (evidencia)    | repo separado |
-
-> **Principio de diseño:** no todo criterio de aceptación debe automatizarse por UI. Los flujos con lógica de scheduler, temporizadores o estados internos del backend (expiración de reserva, concurrencia multi-actor, notificaciones RabbitMQ) se validan con mayor estabilidad y menor costo en la capa API/integración (Karate). Este repositorio cubre los recorridos de usuario que **solo son visibles y verificables desde el navegador**.
-
----
-
-## Stack técnico
-
-| Componente       | Versión / Detalle                              |
-|------------------|------------------------------------------------|
-| Java             | 8+ (validado con 11 y 17)                      |
-| Serenity BDD     | 5.3.8                                          |
-| Cucumber JVM     | 7.34.2                                         |
-| JUnit Platform   | 6.0.3                                          |
-| Maven            | 3.8+                                           |
-| Build tool       | **Maven exclusivamente** (sin Gradle)          |
-| Navegador        | Google Chrome (driver gestionado automáticamente por WebDriverManager) |
-| Patrón de diseño | Screenplay                                     |
-| Selector base    | XPath por texto/rol + `data-testid` donde disponible |
-
----
-
-## Prerrequisitos
-
-1. **Java 8 o superior** con `JAVA_HOME` configurado.
-2. **Maven 3.8+** (`mvn -v` para verificar).
-3. **Google Chrome** instalado — WebDriverManager descarga el ChromeDriver compatible de forma automática.
-4. El **frontend del Ticketing MVP** disponible y corriendo en `http://localhost:5173` (ver sección siguiente).
-
----
-
-## Cómo levantar el frontend
-
-### Entorno estándar (Docker — configuración oficial del proyecto)
-
-El entorno estándar del proyecto levanta el frontend mediante Docker Compose. En esta configuración el frontend ya corre en `http://localhost:5173` con los botones de pago simulado (`Simular Pago Exitoso` / `Simular Pago Rechazado`) activados.
-
-```bash
-# Desde la raíz del repositorio principal del proyecto
-docker compose up -d
-```
-
-La suite ya fue ejecutada exitosamente contra el frontend en esta URL. **No se requiere ningún paso adicional para el flujo estándar.**
-
-### Entorno alternativo (desarrollo local fuera de Docker)
-
-Si el frontend no corre en Docker sino directamente con Node.js, debe iniciarse en **modo E2E** para que los botones de pago simulado queden disponibles:
-
-```bash
-# Desde el repositorio del frontend (alternativa fuera de Docker)
-npm run dev:e2e
-```
-
-> **Nota:** `npm run dev` estándar no expone los botones mock de pago. Usar `npm run dev:e2e` **solo** si el frontend no está corriendo via Docker. En cualquier caso, el puerto de destino es `http://localhost:5173`.
-
----
-
-## Estructura del proyecto
-
-```
-src/
-└── test/
-    ├── java/
-    │   └── ticketing/
-    │       ├── CucumberTestSuite.java              ← Runner (JUnit Platform Suite)
-    │       ├── navigation/
-    │       │   └── NavigateTo.java                 ← Abre /eventos en el navegador
-    │       ├── screenplay/
-    │       │   ├── tasks/
-    │       │   │   ├── SelectEvent.java             ← Clic en tarjeta de evento
-    │       │   │   ├── SelectTier.java              ← Clic en tier (VIP/GENERAL/EARLY_BIRD)
-    │       │   │   ├── ReserveTicket.java           ← Clic en "Reservar"
-    │       │   │   ├── EnterEmail.java              ← Escribe email del invitado
-    │       │   │   ├── ContinueToPayment.java       ← Clic en "Continuar al Pago"
-    │       │   │   └── CompletePayment.java         ← Pago exitoso o rechazado (mock)
-    │       │   ├── questions/
-    │       │   │   ├── SuccessScreen.java           ← Verifica pantalla de confirmación
-    │       │   │   ├── TicketScreen.java            ← Presencia/ausencia del ticket confirmado
-    │       │   │   └── EventsListScreen.java        ← Conteo de eventos en cartelera
-    │       │   └── ui/
-    │       │       ├── EventsPage.java              ← [data-testid^="event-card-"]
-    │       │       ├── EventDetailPage.java         ← XPath por tier (General/VIP/Early Bird)
-    │       │       ├── CheckoutPage.java            ← #checkout-email, XPath continuar
-    │       │       ├── PaymentPage.java             ← XPath botones mock pago
-    │       │       ├── ConfirmationPage.java        ← XPath "¡Pago aprobado!"
-    │       │       └── FailedPaymentPage.java       ← XPath "Pago declinado." + reintentar
-    │       └── stepdefinitions/
-    │           ├── ParameterDefinitions.java        ← Tipo {actor} + @Before stage
-    │           └── GuestPurchaseStepDefinitions.java← Glue code de todos los features
-    └── resources/
-        ├── features/ticketing/
-        │   ├── guest_happy_path.feature            ← 3 escenarios (1 smoke + 2 outline)
-        │   ├── payment_failure.feature             ← 1 escenario (smoke)
-        │   ├── ticket_visibility.feature           ← 2 escenarios
-        │   └── event_availability.feature          ← 3 escenarios (1 smoke + 2 seed-data)
-        ├── serenity.conf                           ← WebDriver + entornos
-        ├── junit-platform.properties               ← Paralelismo y filtros
-        └── logback-test.xml                        ← Logging
-```
-
----
-
-## Ejecución de la suite
-
-La URL base (`http://localhost:5173`) está configurada como valor por defecto en `serenity.conf` y en `pom.xml`.  
-**No es necesario pasar ningún parámetro adicional para el flujo local estándar contra Docker.**
-
-### Ejecución estándar (comando oficial)
-
-```bash
 mvn clean test
-```
 
-Resultado esperado:
-
-```
 Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
-> El reporte HTML Serenity se genera automáticamente al finalizar en `target/site/serenity/index.html`.
+**Entorno ejecutado contra:** Frontend Docker en `http://localhost:5173`
 
-### Solo escenarios @smoke
+| # | Feature | Escenario | Tags | Resultado |
+|---|---------|-----------|------|-----------|
+| 1 | `guest_happy_path` | Flujo completo de compra exitosa (primera llamada) | `@smoke` | ✅ PASS |
+| 2 | `guest_happy_path` | Outline: compra exitosa — tier VIP | `@mvp` | ✅ PASS |
+| 3 | `guest_happy_path` | Outline: compra exitosa — tier GENERAL | `@mvp` | ✅ PASS |
+| 4 | `payment_failure` | Pago rechazado — pantalla de error y botón de reintento | `@smoke` | ✅ PASS |
+| 5 | `ticket_visibility` | Ticket confirmado visible tras pago exitoso | `@smoke` | ✅ PASS |
+| 6 | `ticket_visibility` | Sin ticket confirmado tras pago rechazado | `@mvp` | ✅ PASS |
+| 7 | `event_availability` | Cartelera muestra al menos un evento disponible | `@smoke` | ✅ PASS |
+| 8 | `event_availability` | Tier VIP agotado marcado como no disponible | `@requires-seed-data` | ✅ PASS |
+| 9 | `event_availability` | Early Bird vencido no disponible para selección | `@requires-seed-data` | ✅ PASS |
 
-```bash
-mvn clean test -Dcucumber.filter.tags="@smoke"
+**Cobertura HUs:** HU-03 (escenarios 7–9) · HU-04 (escenarios 1–6) · HU-07 (escenarios 5–6)
+
+---
+
+## 🏗️ Arquitectura y Estructura del Framework
+
+La suite implementa el **Screenplay Pattern** — el patrón de diseño de alto nivel recomendado por SerenityBDD que modela los actores, sus tareas y las preguntas que hacen sobre el sistema. La separación de responsabilidades es estricta:
+
+```
+src/test/
+├── java/ticketing/
+│   ├── CucumberTestSuite.java          ← Runner JUnit Platform Suite
+│   ├── navigation/
+│   │   └── NavigateTo.java             ← Tareas de navegación (Open.url)
+│   ├── screenplay/
+│   │   ├── tasks/                      ← Lo que el actor HACE
+│   │   │   ├── SelectEvent.java        ← Seleccionar evento en cartelera
+│   │   │   ├── SelectTier.java         ← Elegir tier (VIP / GENERAL / EARLY_BIRD)
+│   │   │   ├── ReserveTicket.java      ← Confirmar reserva
+│   │   │   ├── EnterEmail.java         ← Ingresar correo en checkout
+│   │   │   ├── ContinueToPayment.java  ← Avanzar al paso de pago
+│   │   │   └── CompletePayment.java    ← Pago exitoso o rechazado (botones mock)
+│   │   ├── questions/                  ← Lo que el actor PREGUNTA sobre el sistema
+│   │   │   ├── EventsListScreen.java   ← ¿Hay eventos en cartelera?
+│   │   │   ├── SuccessScreen.java      ← ¿Se ve la pantalla de confirmación?
+│   │   │   ├── TicketScreen.java       ← ¿El ticket está o está ausente?
+│   │   │   └── TierAvailabilityScreen.java ← ¿El tier está deshabilitado o ausente?
+│   │   └── ui/                         ← DÓNDE están los elementos (Targets)
+│   │       ├── EventsPage.java         ← Locators de la cartelera (/eventos)
+│   │       ├── EventDetailPage.java    ← Locators de detalle y tiers
+│   │       ├── CheckoutPage.java       ← Locators de checkout (email, continuar)
+│   │       ├── PaymentPage.java        ← Locators de botones de pago mock
+│   │       ├── ConfirmationPage.java   ← Locators de pantalla de éxito
+│   │       └── FailedPaymentPage.java  ← Locators de pantalla de rechazo
+│   └── stepdefinitions/
+│       ├── GuestPurchaseStepDefinitions.java  ← Glue Gherkin → Screenplay
+│       └── ParameterDefinitions.java          ← Tipo {actor} + @Before stage
+└── resources/
+    ├── features/ticketing/             ← Feature files BDD
+    │   ├── guest_happy_path.feature    ← HU-03 + HU-04 (flujo completo guest)
+    │   ├── payment_failure.feature     ← HU-04 CA-02 (pago rechazado)
+    │   ├── ticket_visibility.feature   ← HU-07 (presencia/ausencia de ticket)
+    │   └── event_availability.feature  ← HU-03 (cartelera, tiers agotados/vencidos)
+    ├── serenity.conf                   ← Configuración de entornos y Chrome
+    ├── junit-platform.properties       ← Paralelismo desactivado, filtros de tag
+    └── logback-test.xml                ← Configuración de logging
 ```
 
-### Solo una feature específica
+### Capas del Screenplay Pattern
+
+| Capa | Responsabilidad | Ejemplo |
+|---|---|---|
+| **Tasks** | Lo que el actor *hace* — acciones sobre la UI | `SelectTier.called("GENERAL")` |
+| **Questions** | Lo que el actor *pregunta* sobre el DOM | `TicketScreen.isConfirmed()` |
+| **UI Targets** | *Dónde* están los elementos en el DOM | `EventDetailPage.tierButton("VIP")` |
+| **Step Definitions** | *Glue* — orquesta Tasks y Questions | `actor.attemptsTo(...)` + `Ensure.that(...)` |
+
+---
+
+## ⚡ Instrucciones de Clonado y Setup de Backend
+
+> ⚠️ **Crítico:** Las pruebas UI requieren que el frontend y todos los microservicios estén corriendo. El entorno estándar es Docker Compose.
+
+### 1. Clonar y Levantar el Clúster Backend + Frontend
 
 ```bash
-# Guest happy path (flujo de compra exitosa)
+# Clonar el ecosistema completo del backend
+git clone https://github.com/ChristopherPalloArias/TICKETING_SEM7.git
+cd TICKETING_SEM7
+
+# Configurar variables de entorno
+cp .env.template .env
+
+# Levantar la topología completa (backend + frontend + bases de datos)
+docker-compose up -d --build
+```
+
+Verificar que los servicios responden:
+
+| Servicio | Puerto | Verificación |
+|---|---|---|
+| Frontend (Vite + React) | `localhost:5173` | Abrir en Chrome — debe mostrar cartelera |
+| API Gateway | `localhost:8080` | `curl http://localhost:8080/api/v1/events` |
+| ms-events | `localhost:8081` | `curl http://localhost:8081/actuator/health` |
+| ms-ticketing | `localhost:8082` | `curl http://localhost:8082/actuator/health` |
+| ms-notifications | `localhost:8083` | `curl http://localhost:8083/actuator/health` |
+
+> 💡 **Entorno alternativo (sin Docker):** Si el frontend ya corre con `npm run dev:e2e` en el repo del frontend, las pruebas también funcionan. Este modo activa los botones de pago mock sin necesidad de Docker. La URL base sigue siendo `http://localhost:5173`.
+
+---
+
+### 2. Preparar el Entorno de Automatización SerenityBDD
+
+```bash
+# Clonar este repositorio
+git clone https://github.com/ChristopherPalloArias/TICKETING_SEM7_SERENITY.git
+cd TICKETING_SEM7_SERENITY
+
+# Java 17 requerido — verificar versión
+java -version
+
+# Descargar dependencias Maven (sin ejecutar tests)
+mvn clean install -DskipTests
+```
+
+**WebDriverManager** gestiona automáticamente la versión de ChromeDriver compatible. No es necesario instalar ni configurar ChromeDriver manualmente.
+
+---
+
+## ▶️ Ejecución de las Pruebas
+
+### Ejecución completa (comando oficial)
+
+```bash
+mvn clean test
+```
+
+El reporte de Serenity se genera en `target/site/serenity/index.html`.
+
+---
+
+### Filtrar por tag desde CLI
+
+```bash
+# Solo escenarios de humo (@smoke) — los más críticos, sub-minuto
+mvn clean test -Dcucumber.filter.tags="@smoke"
+
+# Solo escenarios que requieren seed data con condiciones especiales
+mvn clean test -Dcucumber.filter.tags="@requires-seed-data"
+
+# Solo el flujo del guest happy path completo
 mvn clean test -Dcucumber.filter.tags="@guest-happy-path"
 
-# Pago rechazado
+# Solo escenarios de pago rechazado
 mvn clean test -Dcucumber.filter.tags="@payment-failure"
-
-# Visibilidad de ticket confirmado
-mvn clean test -Dcucumber.filter.tags="@ticket-visibility"
-
-# Disponibilidad en cartelera
-mvn clean test -Dcucumber.filter.tags="@event-availability"
 ```
 
-### Headless (para CI/CD)
+---
+
+### Cambiar entorno de ejecución
+
+```bash
+# Entorno estándar (default) — Docker en localhost:5173
+mvn clean test
+
+# Especificar URL directamente
+mvn clean test -Dwebdriver.base.url=http://localhost:5173
+
+# Entorno alternativo de desarrollo local
+mvn clean test -Dwebdriver.base.url=http://localhost:3001
+
+# Entorno staging
+mvn clean test -Denvironment=staging
+```
+
+---
+
+### Ejecutar en modo headless (para CI/CD)
 
 ```bash
 mvn clean test -Dheadless.mode=true
 ```
 
-### Solo compilar sin ejecutar
+---
+
+### Guardar log de ejecución como evidencia
 
 ```bash
-mvn test-compile -q
+mvn clean test 2>&1 | tee serenity_execution_$(date +%Y%m%d_%H%M%S).txt
 ```
 
 ---
 
-## Parametrización de URL base
+## 🌱 Datos de Prueba y Seed Data
 
-La URL por defecto es `http://localhost:5173` y está declarada en `src/test/resources/serenity.conf` bajo el entorno `default`.  
-Para entornos distintos al local estándar, usa `-Denvironment` o el override `-Dwebdriver.base.url`:
+La suite depende de migraciones Flyway aplicadas automáticamente al levantar `ms-events`:
 
-```bash
-# Staging
-mvn clean test -Denvironment=staging
+| Migración | Propósito |
+|---|---|
+| `V7__seed_demo_data.sql` | 4 eventos `PUBLISHED` con sus 9 tiers configurados y con cupos disponibles. Garantiza que la cartelera muestre eventos y que el flujo de compra sea completable. |
+| `V16__create_test_scenario_conditions.sql` | Condiciones especiales para HU-03: **BODAS DE SANGRE · VIP** con `quota = 0` (tier AGOTADO) y **The Phantom's Echo · EARLY_BIRD** con `valid_until` en el pasado (tier VENCIDO). Requerido para los escenarios `@requires-seed-data`. |
 
-# Override puntual a cualquier URL
-mvn clean test -Dwebdriver.base.url=https://otro-host.example.com
+> ⚠️ **Si los escenarios `@requires-seed-data` fallan**, verificar que la migración V16 fue aplicada:
+> ```bash
+> PGPASSWORD=postgres psql -h localhost -p 5433 -U postgres -d events_db \
+>   -c "SELECT tier_type, quota, valid_until FROM tiers WHERE event_id IN \
+>       (SELECT id FROM events WHERE title ILIKE '%Bodas%' OR title ILIKE '%Phantom%');"
+> ```
+
+---
+
+## 🧩 Consideraciones Técnicas y Retos Avanzados Resueltos
+
+### Screenplay Pattern — Separación estricta de responsabilidades
+
+A diferencia del patrón Page Object Model tradicional, el **Screenplay Pattern** organiza la automatización en torno a los *actores* del sistema (en este caso, el comprador anónimo Marta). Cada actor puede intentar *tareas* y hacer *preguntas* sobre el estado del sistema.
+
+```java
+// Patrón correcto — actor orquesta tareas y preguntas:
+actor.attemptsTo(
+    SelectTier.called("GENERAL"),
+    ReserveTicket.now(),
+    EnterEmail.withAddress("marta.guest@example.com")
+);
+actor.attemptsTo(
+    Ensure.that(TicketScreen.isConfirmed()).isTrue()
+);
 ```
 
-Entornos configurados en `src/test/resources/serenity.conf`:
+Esto garantiza que los step definitions no contengan lógica de interacción directa con el DOM — solo orquestación de alto nivel, lo que hace la suite **legible, mantenible y sin acoplamiento a implementaciones de WebDriver**.
 
-```hocon
-environments {
-  default { webdriver.base.url = "http://localhost:5173" }
-  dev     { webdriver.base.url = "http://localhost:5173" }
-  staging { webdriver.base.url = "https://staging.ticketing.example.com" }
-  prod    { webdriver.base.url = "https://ticketing.example.com" }
+---
+
+### Esperas explícitas sin `Thread.sleep()`
+
+Toda la suite elimina completamente las esperas estáticas con `Thread.sleep()`. Las esperas son explícitas y orientadas al estado real del DOM:
+
+```java
+// WaitUntil aplicado antes de toda interacción:
+WaitUntil.the(EventDetailPage.tierButton("GENERAL"), isClickable())
+         .forNoMoreThan(10).seconds()
+```
+
+Este patrón se aplica consistentemente en cada Task y en los step definitions de validación, respetando el tiempo real de respuesta del frontend sin introducir fragilidd.
+
+---
+
+### Selectores estables: `data-testid` y `aria-*` sobre clases CSS
+
+Los selectores se diseñaron en coordinación con DEV para resistir refactorizaciones del frontend:
+
+| Estrategia | Ejemplo | Uso |
+|---|---|---|
+| `data-testid` | `[data-testid^='event-card-']` | Tarjetas de evento en cartelera |
+| `aria-disabled` | `//div[@role='button' and @aria-disabled='true']` | Tiers no disponibles |
+| XPath `normalize-space()` | `//button[.//span[normalize-space()='Reservar']]` | Botones sin `data-testid` |
+| XPath `contains()` | `//button[contains(normalize-space(.), 'Reintentar Pago')]` | Texto variable (Nº de intento) |
+| `concat()` en XPath | Apóstrofes en títulos: *"The Phantom's Echo"* | Manejo seguro de caracteres especiales |
+
+**Se evitan completamente** las clases CSS generadas por CSS Modules (`_class_hashrandom`) ya que cambian en cada build de producción.
+
+---
+
+### Escenarios excluidos de UI por diseño y ROI
+
+> **No todo criterio de aceptación conviene automatizarse desde el navegador.**
+
+Los siguientes flujos se analizaron y **excluyen deliberadamente de Serenity**, cubiertos íntegramente por Karate:
+
+| Escenario | Razón de exclusión de UI |
+|---|---|
+| Expiración de reserva (PENDING → EXPIRED) | Scheduler-driven. TTL mínimo de 10 min + ciclo de `ExpirationService` cada 60 s. Requeriría `Thread.sleep(600000)` → frágil e inviable. |
+| Liberación automática de cupo | Consecuencia del scheduler. La UI solo muestra el estado final; la transición es opaca al navegador. |
+| Compra concurrente sobre última entrada | Requiere dos actores simultáneos. No modelable en Serenity sin paralelismo forzado de ChromeDriver. |
+| Notificaciones RabbitMQ | Canal WebSocket/RabbitMQ. No verificable desde Selenium sin mocks externos. |
+| Límite de reintentos de pago | Estado interno del backend. La UI no expone un indicador de "intento N de N" verificable de forma determinista. |
+
+Esta decisión **reduce fragilidad, elimina esperas artificiales y mejora la mantenibilidad** de la suite UI. La cobertura de estos flujos en Karate es exhaustiva y sin tiempos de espera gracias a la `Time Travel API` del backend.
+
+---
+
+### Email con timestamp — idempotencia entre corridas
+
+El paso de ingreso de email genera automáticamente una dirección única por corrida:
+
+```java
+// marta.guest@example.com → marta.guest+20260408163052@example.com
+private static String toUniqueEmail(String email) {
+    String ts = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    int at = email.indexOf('@');
+    return email.substring(0, at) + "+" + ts + email.substring(at);
 }
 ```
 
-`-Dwebdriver.base.url` tiene precedencia sobre el valor en `serenity.conf`.
+Esto garantiza que cada escenario opera con un email fresco, evitando colisiones en la base de datos entre corridas consecutivas sin necesidad de scripts de limpieza.
 
 ---
 
-## Cobertura actual
+### Pregunta defensiva `TicketScreen.isAbsent()`
 
-### Estado de ejecución
+Para el escenario negativo (sin ticket tras pago rechazado), la `Question` implementa un patrón defensivo con `try-catch`:
 
-```
-Tests run: 9  |  Failures: 0  |  Errors: 0  |  Skipped: 0
-BUILD SUCCESS
-```
-
-Ejecución validada contra el frontend Docker en `http://localhost:5173`.
-
-### Escenarios por feature
-
-#### `guest_happy_path.feature` — `@guest-happy-path @mvp`
-
-| # | Escenario | Tags |
-|---|-----------|------|
-| 1 | Invitado completa el flujo de compra exitosamente de principio a fin | `@smoke` |
-| 2 | Invitado elige tier VIP y completa la compra | outline |
-| 3 | Invitado elige tier GENERAL y completa la compra | outline |
-
-Flujo cubierto: `/eventos` → tarjeta de evento → selección de tier → Reservar → checkout (email) → Continuar al Pago → Simular Pago Exitoso → pantalla de confirmación.
-
-> Nota: el tier EARLY_BIRD de *The Phantom's Echo* está expirado por diseño (condición fijada en V16 de migraciones). El outline cubre VIP y GENERAL — ambos activos.
-
-#### `payment_failure.feature` — `@payment-failure @mvp`
-
-| # | Escenario | Tags |
-|---|-----------|------|
-| 4 | Invitado intenta pagar pero el pago es rechazado y ve la pantalla de fallo con opción de reintento | `@smoke` |
-
-Valida: mensaje "Pago declinado.", presencia del botón "Reintentar Pago".
-
-#### `ticket_visibility.feature` — `@ticket-visibility @mvp`
-
-| # | Escenario | Tags |
-|---|-----------|------|
-| 5 | Invitado visualiza el ticket confirmado tras una compra exitosa | `@smoke` |
-| 6 | Invitado con pago rechazado no visualiza el ticket confirmado | — |
-
-Valida: texto "¡Pago aprobado!" visible (escenario positivo); ausencia de ese elemento en pantalla de fallo (escenario negativo).
-
-#### `event_availability.feature` — `@event-availability @mvp`
-
-| # | Escenario | Tags |
-|---|-----------|------|
-| 7 | La cartelera muestra al menos un evento disponible | `@smoke` |
-| 8 | Comprador observa un tier agotado como no disponible en pantalla | `@requires-seed-data` |
-| 9 | Comprador no ve el Early Bird como opción de compra activa cuando su período venció | `@requires-seed-data` |
-
-Escenario 7: Valida existencia de al menos una tarjeta `[data-testid^="event-card-"]` en `/eventos`.
-
-Escenarios 8-9: Validan disponibilidad de tiers. Precondiciones persistidas en `V16__create_test_scenario_conditions.sql`:
-- BODAS DE SANGRE · VIP: `quota = 0` → `aria-disabled="true"` en el tier card
-- The Phantom's Echo · EARLY_BIRD: `valid_until` en el pasado → mismo estado
-
-### Correspondencia con HUs oficiales del proyecto
-
-Esta suite cubre la **capa UI funcional priorizada del comprador**. Las HUs cubiertas corresponden a las historias de usuario oficiales del proyecto (`PRD_BACKLOG/USER_STORIES.md`):
-
-| HU oficial | Descripción oficial | Cobertura en Serenity UI | Capa complementaria |
-|------------|---------------------|--------------------------|--------------------|
-| **HU-03** | Visualización de eventos y disponibilidad | ✅ Escenarios 7, 8, 9 — cartelera, tier agotado, Early Bird vencido | Karate (API) |
-| **HU-04** | Reserva y compra de entrada con pago simulado | ✅ Escenarios 1–6 — flujo completo guest, pago exitoso y rechazado | Karate (API) |
-| **HU-07** | Visualización de ticket confirmado | ✅ Escenarios 5, 6 — ticket visible tras pago exitoso; ausente tras rechazo | Karate (API) |
-
-> **Nota importante:** HU-01 (Creación de evento), HU-02 (Configuración de tiers), HU-05 (Liberación automática) y HU-06 (Notificaciones) son funcionalidades backend/admin que no tienen representación directa en flujos UI del comprador anónimo. Están cubiertas íntegramente por **Karate**. No se redefinen ni renumeran en este repositorio.
-
----
-
-## Diseño de la automatización
-
-### Patrón Screenplay
-
-Toda la lógica de interacción está organizada siguiendo el **Screenplay Pattern**:
-
-- **Tasks**: acciones de alto nivel que un actor realiza (`SelectEvent`, `CompletePayment`, etc.).
-- **Questions**: inspecciones del estado de la UI (`SuccessScreen.isVisible()`, `TicketScreen.isAbsent()`, `EventsListScreen.hasAtLeastOneEvent()`).
-- **UI Targets**: locators centralizados por pantalla (`EventsPage`, `EventDetailPage`, `ConfirmationPage`, etc.).
-
-### Selectores
-
-Los selectores se establecen por auditoría directa del DOM del frontend en cada iteración. La estrategia aplicada:
-
-- `[data-testid^="event-card-"]` donde el frontend expone `data-testid`.
-- XPath por texto visible normalizado (`normalize-space()`) para elementos sin `data-testid`.
-- Sin selectores por clase CSS ni por posición relativa frágil.
-
-### Esperas
-
-No se usa `Thread.sleep()` en ningún archivo del proyecto. Todas las esperas son explícitas mediante `WaitUntil.the(target, matcher).forNoMoreThan(N).seconds()`, ejecutadas dentro de cada tarea o step antes de la acción o assertion correspondiente.
-
-### Unicidad de email
-
-El task `EnterEmail` genera un sufijo de timestamp (`yyyyMMddHHmmss`) antes del `@` para garantizar unicidad de email entre ejecuciones sin necesidad de limpiar datos del backend.
-
----
-
-## Reportes Serenity
-
-### Generación
-
-El reporte HTML se genera automáticamente con cada ejecución de `mvn clean test`. Para regenerarlo sobre resultados existentes:
-
-```bash
-mvn serenity:aggregate
+```java
+public static Question<Boolean> isAbsent() {
+    return actor -> {
+        try {
+            return !ConfirmationPage.SUCCESS_TITLE
+                    .resolveFor(actor)
+                    .isDisplayed();
+        } catch (Exception e) {
+            // Elemento ausente del DOM → ticket ausente → correcto
+            return true;
+        }
+    };
+}
 ```
 
-### Ubicación
-
-```
-target/site/serenity/index.html
-```
-
-### Contenido del reporte
-
-- Resumen de resultados por feature y escenario.
-- Línea de tiempo de ejecución (`target/build/test-results/timeline/index.html`).
-- Capturas de pantalla automáticas en caso de fallo (`serenity.take.screenshots = FOR_FAILURES`).
-- Narración de cada paso tal como la describe el Screenplay (ej. `Marta clicks on botón simular pago exitoso`).
-- Contexto de ejecución: navegador, SO, actor, duración por paso.
+Esto funciona correctamente tanto si el elemento no existe en el DOM (caso esperado tras pago rechazado) como si existe pero no es visible.
 
 ---
 
-## Limitaciones actuales y próximos pasos
+## 🤖 Sobre la Orquestación ASDD
 
-### Limitaciones conocidas
-
-| Limitación | Detalle |
-|---|---|
-| Sin flujo autenticado | El repositorio cubre únicamente el flujo de compra como visitante anónimo (guest). Los flujos de login, historial y admin están en Karate. |
-| Sin validaciones de formulario | No se cubren mensajes de error por email inválido ni campos vacíos. |
-| Sin tests responsive/móvil | La suite corre en Chrome escritorio 1280×900. |
-| Pago simulado requiere modo E2E | Los tests de pago requieren que el frontend tenga los botones mock disponibles. En Docker esto es automático. En modo local: usar `npm run dev:e2e`. |
-| Expiración y restauración de cupo | Este flujo es scheduler-driven (TTL 10 min + ciclo de 60 s). No es automatizable por UI sin sleeps. Cubierto en Karate. |
-
-### Próximos pasos recomendados
-
-1. **Validaciones de formulario de checkout**
-   - Email inválido → mensaje de error visible.
-   - Campo vacío → botón "Continuar al Pago" deshabilitado.
-
-2. **CI/CD**
-   - El workflow `.github/workflows/maven.yml` ya existe. Ampliar con `mvn clean test -Dheadless.mode=true` y publicar el reporte Serenity como artefacto del pipeline.
-
-3. **Datos de prueba**
-   - Introducir un `TestDataFactory` si la variedad de escenarios lo amerita.
-   - Considerar reset de datos vía API antes de escenarios que requieran estado limpio.
-
----
-
-## Qué no debe incluirse en el ZIP de entrega
-
-Al empaquetar el repositorio para entrega, excluir obligatoriamente:
-
-| Carpeta / Archivo | Razón |
-|---|---|
-| `.git/` | Metadatos internos de control de versiones, no pertenecen al entregable |
-| `target/` | Artefactos generados por Maven en tiempo de compilación/prueba |
-| `.idea/` | Configuración local del IDE (IntelliJ IDEA) |
-| `*.iml` | Módulos de proyecto IntelliJ, específicos del entorno local |
-| `.DS_Store` | Metadatos del sistema de archivos macOS |
-| `build/` | Directorio de output alternativo generado por algunas herramientas |
-
-El ZIP debe contener únicamente: `pom.xml`, `serenity.properties`, `src/`, `.gitignore`, `README.md`, `TEST_PLAN.md`, `.github/`.
-
----
-
-## Comandos de referencia rápida
-
-```bash
-# Ejecución estándar (comando oficial)
-mvn clean test
-
-# Solo @smoke
-mvn clean test -Dcucumber.filter.tags="@smoke"
-
-# Headless (CI/CD)
-mvn clean test -Dheadless.mode=true
-
-# Compilar sin ejecutar
-mvn test-compile -q
-
-# Regenerar reporte sobre resultados existentes
-mvn serenity:aggregate
-
-# Limpiar resultados anteriores
-mvn clean
-```
-
----
-
-## Referencias
-
-- [Serenity BDD — Documentación oficial](https://serenity-bdd.github.io/theserenitybook/latest/)
-- [Screenplay Pattern Guide](https://serenity-bdd.github.io/theserenitybook/latest/screenplay.html)
-- [serenity-cucumber-starter (template base)](https://github.com/serenity-bdd/serenity-cucumber-starter)
-- [Cucumber JVM — Documentación](https://cucumber.io/docs/cucumber/)
-- [JUnit Platform — Cucumber integration](https://cucumber.io/docs/cucumber/api/?lang=java#junit-platform)
-- [Historias de Usuario oficiales del proyecto](../PRD_BACKLOG/USER_STORIES.md)
+Para más detalle sobre las directrices de Calidad Preventiva impulsadas por Especificaciones controladas por Agente AI que enmarcan la evolución del proyecto, consultar la bitácora madre interna en [`.github/README_ASDD.md`](./.github/README_ASDD.md).

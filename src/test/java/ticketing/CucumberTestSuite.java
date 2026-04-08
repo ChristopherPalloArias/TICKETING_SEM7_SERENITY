@@ -12,16 +12,16 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
  * Runner principal de Cucumber para el proyecto Ticketing MVP.
  *
  * Ejecución estándar:
- *   mvn clean verify
+ *   mvn clean test
  *
  * Filtrar por tag:
- *   mvn clean verify -Dcucumber.filter.tags="@guest-happy-path"
+ *   mvn clean test -Dcucumber.filter.tags="@guest-happy-path"
  *
  * Cambiar entorno:
- *   mvn clean verify -Denvironment=staging
+ *   mvn clean test -Denvironment=staging
  *
  * Cambiar baseUrl directamente:
- *   mvn clean verify -Dwebdriver.base.url=http://localhost:3001
+ *   mvn clean test -Dwebdriver.base.url=http://localhost:3001
  */
 @Suite
 @IncludeEngines("cucumber")

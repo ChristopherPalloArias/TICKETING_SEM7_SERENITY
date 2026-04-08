@@ -13,7 +13,7 @@ import net.serenitybdd.screenplay.actions.Open;
  *
  * La URL base se lee en este orden de prioridad:
  *   1. Propiedad JVM: -Dwebdriver.base.url=http://localhost:5173  (CLI o systemPropertyVariables de Surefire)
- *   2. Valor de reserva: http://localhost:3000
+ *   2. Valor de reserva: http://localhost:5173  (coincide con default de serenity.conf y pom.xml)
  *
  * Ejemplos de uso:
  *   mvn clean verify -Dwebdriver.base.url=http://localhost:5173
@@ -26,7 +26,7 @@ public class NavigateTo {
      * Se resuelve en tiempo de ejecucion para respetar el valor pasado por CLI.
      */
     private static String baseUrl() {
-        return System.getProperty("webdriver.base.url", "http://localhost:3000")
+        return System.getProperty("webdriver.base.url", "http://localhost:5173")
                      .replaceAll("/$", "");
     }
 

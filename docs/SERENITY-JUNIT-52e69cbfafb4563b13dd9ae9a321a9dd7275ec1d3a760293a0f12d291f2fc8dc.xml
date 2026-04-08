@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Pago rechazado en flujo de compra guest" skipped="0" tests="1" time="5.0" timestamp="2026-04-08 04:38:46"><testcase name="Invitado intenta pagar pero el pago es rechazado y el sistema muestra la pantalla de fallo con opción de reintento"/></testsuite>

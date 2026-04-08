@@ -14,8 +14,10 @@ buildNumber.properties
 
 # ─── Serenity BDD — artefactos generados ──────────────────────────────────────
 # build/ contiene el timeline HTML generado por SerenityReporterParallel.
-# Es un artefacto de ejecución, no código fuente. No debe subirse al repo.
+# docs/ contiene el reporte HTML publicado — se gestiona via branch gh-pages,
+# no se commitea en main. Usar ./publish-report.sh para publicar.
 build/
+docs/
 serenity-reports/
 
 # ─── Logs y evidencias generadas automáticamente ─────────────────────────────

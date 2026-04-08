@@ -2,10 +2,8 @@ name: Deploy Serenity Report to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
-    paths:
-      - "docs/**"        # Solo se dispara cuando se actualizan los reportes en docs/
-  workflow_dispatch:     # También disparable manualmente desde Actions
+    branches: ["gh-pages"]   # Se dispara cuando publish-report.sh hace push a gh-pages
+  workflow_dispatch:          # También disparable manualmente desde Actions
 
 permissions:
   contents: read
@@ -24,33 +22,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del código
+      - name: Checkout del branch gh-pages
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages     # Siempre leer desde el branch gh-pages, no main
 
-      - name: Verificar y preparar el reporte Serenity
+      - name: Verificar que el reporte existe
         run: |
-          # El reporte Serenity se genera localmente con: mvn clean test
-          # Luego se copia a docs/ con: cp -r target/site/serenity/* docs/
-          # Este workflow despliega lo que esté en docs/
-          if [ ! -d "docs" ] || [ -z "$(ls -A docs 2>/dev/null)" ]; then
-            echo "❌ La carpeta docs/ está vacía o no existe."
-            echo ""
-            echo "Para generar y publicar el reporte Serenity:"
-            echo "  1. Asegúrate de que el frontend corre en http://localhost:5173 (Docker)"
-            echo "  2. Ejecuta: mvn clean test"
-            echo "  3. Copia el reporte: mkdir -p docs && cp -r target/site/serenity/. docs/"
-            echo "  4. Commit y push: git add docs/ && git commit -m 'docs: update Serenity report' && git push"
+          if [ ! -f "index.html" ]; then
+            echo "❌ index.html no encontrado en el branch gh-pages."
+            echo "Ejecuta ./publish-report.sh localmente para generar y publicar el reporte."
             exit 1
           fi
-
-          # El reporte Serenity genera index.html en la raíz — verificar
-          if [ ! -f "docs/index.html" ]; then
-            echo "⚠️  docs/index.html no encontrado. Verifica que copiaste target/site/serenity/ completo."
-            exit 1
-          fi
-
-          echo "✅ Reporte Serenity listo para despliegue."
-          echo "   Archivos encontrados: $(find docs -type f | wc -l)"
+          echo "✅ Reporte Serenity listo: $(find . -type f | wc -l) archivos"
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
@@ -58,7 +42,7 @@ jobs:
       - name: Subir artifact de Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'
+          path: '.'
 
       - name: Desplegar a GitHub Pages
         id: deployment

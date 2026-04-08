@@ -1,8 +1,8 @@
 # =============================================================================
 # Feature: Compra exitosa de entrada como invitado (Guest Happy Path)
 # Proyecto: Ticketing MVP
-# Cubre: HU-01 – Visualización de cartelera / HU-02 – Selección de función
-#         HU-06 – Flujo de compra guest
+# Cubre: HU-03 – Visualización de eventos y disponibilidad (cartelera)
+#         HU-04 – Reserva y compra de entrada con pago simulado (CA-01)
 # Tags utilizados: @guest-happy-path  @smoke  @mvp
 # =============================================================================
 @mvp @guest-happy-path

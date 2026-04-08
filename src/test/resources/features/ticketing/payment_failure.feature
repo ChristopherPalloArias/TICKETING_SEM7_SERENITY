@@ -1,7 +1,7 @@
 # =============================================================================
 # Feature: Pago rechazado en flujo de compra guest
 # Proyecto: Ticketing MVP
-# Cubre: HU-06 – Flujo de compra guest (camino alternativo: pago declinado)
+# Cubre: HU-04 – Reserva y compra de entrada con pago simulado (CA-02: pago rechazado)
 # Tags: @payment-failure  @mvp
 # =============================================================================
 @mvp @payment-failure

@@ -20,11 +20,13 @@ jobs:
         distribution: 'adopt'
         cache: maven
 
-    - name: Build with Maven
+    - name: Run tests and generate Serenity report
+      # mvn verify: runs Surefire (tests) + serenity:aggregate (HTML report)
+      # -Denvironment=with_screenshots activates screenshots on every step
       run: mvn -B verify --file pom.xml -Denvironment=with_screenshots
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: target/site/serenity # The folder the action should deploy.
+        branch: gh-pages
+        folder: target/site/serenity

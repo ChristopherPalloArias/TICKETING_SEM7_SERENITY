@@ -21,8 +21,8 @@
         <cucumber.version>7.34.2</cucumber.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
-        <!-- URL base parametrizable: sobreescribir con -Dwebdriver.base.url=http://localhost:3000 -->
-        <webdriver.base.url>http://localhost:3000</webdriver.base.url>
+        <!-- URL base del frontend local en modo E2E. Override: -Dwebdriver.base.url=https://otro-host -->
+        <webdriver.base.url>http://localhost:5173</webdriver.base.url>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -135,34 +135,10 @@
                 </configuration>
             </plugin>
             <!--
-                maven-failsafe-plugin: alternativa para ejecutar con "mvn clean verify".
-                Ambas formas funcionan; Failsafe corre en la fase integration-test.
+                maven-failsafe-plugin eliminado intencionalmente.
+                El único camino oficial es: mvn clean test (Surefire).
+                mvn clean verify también funciona: ejecuta Surefire + serenity:aggregate.
             -->
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <includes>
-                        <include>**/*TestSuite.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/Test*.java</include>
-                        <include>**/When*.java</include>
-                    </includes>
-                    <systemPropertyVariables>
-                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                    </systemPropertyVariables>
-                    <!-- Paralelismo DESACTIVADO: 1 escenario a la vez -->
-                    <!-- Para activar en el futuro: <parallel>classes</parallel> + <useUnlimitedThreads>true</useUnlimitedThreads> -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

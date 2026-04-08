@@ -1,7 +1,7 @@
 # =============================================================================
 # Feature: Visibilidad del ticket confirmado tras el proceso de compra
 # Proyecto: Ticketing MVP
-# Cubre: HU-06 – Flujo de compra guest (evidencia de ticket emitido)
+# Cubre: HU-07 – Visualización de ticket confirmado (CA-01, CA-02, CA-03)
 # Tags: @ticket-visibility  @mvp
 #
 # Escenarios:

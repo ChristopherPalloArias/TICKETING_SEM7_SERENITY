@@ -40,4 +40,3 @@ Feature: Compra exitosa de entrada como invitado
       | tier         |
       | VIP          |
       | GENERAL      |
-      | EARLY_BIRD   |

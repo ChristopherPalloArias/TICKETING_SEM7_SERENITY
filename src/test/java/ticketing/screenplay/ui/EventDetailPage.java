@@ -5,17 +5,15 @@ import net.serenitybdd.screenplay.targets.Target;
 /**
  * Locators de la página de detalle / selección de tier del evento.
  *
- * NOTA IMPORTANTE – Auditoría del frontend (2026-04-08):
- * Los tier cards NO tienen data-testid. Se identifican por el texto visible
- * dentro del span de nombre, usando XPath. Los nombres reales en el DOM son:
- *   "General" | "VIP" | "Early Bird"
+ * Auditoría del frontend (2026-04-08) – TicketTier.tsx:
+ *   • Cada tier card tiene  data-testid="tier-{tierType}"
+ *     donde tierType es "GENERAL" | "VIP" | "EARLY_BIRD".
+ *   • Un tier no disponible recibe  aria-disabled="true".
+ *   • El span de nombre usa  className={styles.tierName}  (CSS Module).
+ *   • El botón Reservar carece de data-testid; se localiza por texto.
  *
- * El botón Reservar tampoco tiene data-testid; se localiza por su texto.
- *
- * Parámetros Gherkin aceptados → nombre real en DOM:
- *   "GENERAL"    → "General"
- *   "VIP"        → "VIP"
- *   "EARLY_BIRD" → "Early Bird"
+ * Parámetros Gherkin aceptados (coinciden con tierType del backend):
+ *   "GENERAL" | "VIP" | "EARLY_BIRD"
  */
 public class EventDetailPage {
 
@@ -46,21 +44,24 @@ public class EventDetailPage {
                   .locatedBy("//button[.//span[normalize-space()='Reservar']]");
 
     /**
-     * Tier deshabilitado: mismo patrón XPath pero restringido a
-     * div[@role='button' and @aria-disabled='true'].
+     * Tier deshabilitado: localiza el div[@role='button'] con aria-disabled="true"
+     * que contiene el span del nombre visible del tier.
      *
-     * ── SUPUESTO DE DOM ────────────────────────────────────────────────────
-     * Se asume que el frontend marca un tier no disponible con aria-disabled="true"
-     * en el div[@role='button']. Esta es la convención WAI-ARIA estándar.
+     * En TicketTier.tsx cuando disabled=true (!tier.isAvailable):
+     *   &lt;motion.div
+     *       data-testid={`tier-${tier.tierType}`}
+     *       role="button"
+     *       aria-disabled={disabled}    // "true" cuando !isAvailable
+     *       tabIndex={-1}               // tabIndex=-1 cuando deshabilitado
+     *   &gt;
+     *     &lt;span className={styles.tierName}&gt;General | VIP | Early Bird&lt;/span&gt;
      *
-     * VERIFICAR con devtools antes de ejecutar escenarios @requires-seed-data:
-     *   - Con un evento de stock=0 activo, inspeccionar el tier card.
-     *   - Si el atributo real es diferente (p.ej. clase CSS, data-attr),
-     *     actualizar el XPath de este método.
+     * Estrategia: aria-disabled="true" + span con nombre visible (más robusto que
+     * data-testid, que puede eliminarse en algunos builds).
      *
      * Usado por: TierAvailabilityScreen.isTierUnavailable()
      *
-     * @param tierName "GENERAL" | "VIP" | "EARLY_BIRD"
+     * @param tierName "GENERAL" | "VIP" | "EARLY_BIRD"  (equals tier.tierType in backend)
      * @return Target XPath apuntando al tier deshabilitado
      */
     public static Target tierDeshabilitado(String tierName) {
@@ -68,7 +69,7 @@ public class EventDetailPage {
         return Target.the("tier " + displayName + " deshabilitado")
                      .locatedBy("//div[@role='button' and @aria-disabled='true']"
                               + "//span[normalize-space()='" + displayName + "']"
-                              + "/ancestor::div[@role='button'][1]");
+                              + "/ancestor::div[@role='button' and @aria-disabled='true'][1]");
     }
 
     /**

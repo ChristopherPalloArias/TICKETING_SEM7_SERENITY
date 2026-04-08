@@ -30,23 +30,11 @@
 [[1;34mINFO[m] -------------------------------------------------------
 [[1;34mINFO[m]  T E S T S
 [[1;34mINFO[m] -------------------------------------------------------
-abr. 08, 2026 4:34:31 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
-ADVERTENCIA: TestEngine with ID 'junit-platform-suite' encountered a non-critical issue during test discovery:
-
-(1) [WARNING] [cucumber] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead (via @Suite ticketing.CucumberTestSuite).
 [[1;34mINFO[m] Running ticketing.[1mCucumberTestSuite[m
-SLF4J(W): No SLF4J providers were found.
-SLF4J(W): Defaulting to no-operation (NOP) logger implementation
-SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
-SLF4J(W): Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
-SLF4J(W): Ignoring binding found at [jar:file:/home/christopher/.m2/repository/ch/qos/logback/logback-classic/1.2.10/logback-classic-1.2.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J(W): See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
 
 @mvp @event-availability @smoke
 [1mScenario:[22m La cartelera muestra al menos un evento disponible             [90m# classpath:features/ticketing/event_availability.feature:26[39m
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
-abr. 08, 2026 4:34:33 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver al menos un evento disponible en la cartelera[39m [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerAlMenosUnEventoEnCartelera(net.serenitybdd.screenplay.Actor)[39m
 
@@ -68,8 +56,6 @@ ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the cl
 @mvp @guest-happy-path @smoke
 [1mScenario:[22m Invitado completa el flujo de compra exitosamente de principio a fin [90m# classpath:features/ticketing/guest_happy_path.feature:19[39m
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m               [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
-abr. 08, 2026 4:34:36 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                           [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                       [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
   [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
@@ -106,8 +92,6 @@ ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the cl
 @mvp @payment-failure @smoke
 [1mScenario:[22m Invitado intenta pagar pero el pago es rechazado y el sistema muestra la pantalla de fallo con opción de reintento [90m# classpath:features/ticketing/payment_failure.feature:19[39m
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m                                                             [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
-abr. 08, 2026 4:34:48 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                                                                         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                                                                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
   [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                                                                        [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
@@ -121,8 +105,6 @@ ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the cl
 @mvp @ticket-visibility @smoke
 [1mScenario:[22m Invitado visualiza el ticket confirmado tras una compra exitosa [90m# classpath:features/ticketing/ticket_visibility.feature:28[39m
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
-abr. 08, 2026 4:34:52 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
-ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
   [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
   [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
@@ -145,15 +127,7 @@ ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the cl
   [32m✔[39m [32m[1mAnd [22m[1mMarta[22m simula un pago rechazado[39m                                  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.simulaUnPagoRechazado(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de pago rechazado[39m                [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaPantallaDeRechazo(net.serenitybdd.screenplay.Actor)[39m
   [32m✔[39m [32m[1mAnd [22m[1mMarta[22m no debería ver ningún ticket confirmado[39m                   [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.noDeberiaVerNingunTicketConfirmado(net.serenitybdd.screenplay.Actor)[39m
-abr. 08, 2026 4:35:01 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
-ADVERTENCIA: TestEngine with ID 'cucumber' encountered a non-critical issue during test discovery:
-
-(1) [WARNING] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead
-[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.80 s -- in ticketing.[1mCucumberTestSuite[m
-abr. 08, 2026 4:35:01 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
-ADVERTENCIA: TestEngine with ID 'junit-platform-suite' encountered a non-critical issue during test discovery:
-
-(1) [WARNING] [cucumber] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead (via @Suite ticketing.CucumberTestSuite).
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.92 s -- in ticketing.[1mCucumberTestSuite[m
 [[1;34mINFO[m] 
 [[1;34mINFO[m] Results:
 [[1;34mINFO[m] 
@@ -162,7 +136,7 @@ ADVERTENCIA: TestEngine with ID 'junit-platform-suite' encountered a non-critica
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  33.844 s
-[[1;34mINFO[m] Finished at: 2026-04-08T16:35:02-05:00
+[[1;34mINFO[m] Total time:  38.174 s
+[[1;34mINFO[m] Finished at: 2026-04-08T16:56:46-05:00
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[0m[0m
+[0m

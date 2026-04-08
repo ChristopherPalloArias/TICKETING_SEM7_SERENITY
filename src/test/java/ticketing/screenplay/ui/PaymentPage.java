@@ -3,15 +3,30 @@ package ticketing.screenplay.ui;
 import net.serenitybdd.screenplay.targets.Target;
 
 /**
- * Locators de la pantalla de Pago (Payment).
+ * Locators de la pantalla de Pago simulado.
  *
- * Selector validado: "mock-payment-success" – botón que simula un pago exitoso
- * en el entorno E2E del frontend (activado con npm run dev:e2e).
+ * NOTA – Auditoría del frontend (2026-04-08):
+ * Los botones NO tienen data-testid. Se identifican por el texto
+ * visible dentro del h3 anidado en cada botón.
+ *
+ * Botón de pago exitoso: "Simular Pago Exitoso"
+ * Botón de pago rechazado: "Simular Pago Rechazado"
  */
 public class PaymentPage {
 
-    /** Botón de simulación de pago exitoso (disponible sólo en modo E2E). */
+    /**
+     * Botón para simular un pago aprobado.
+     * HTML real: &lt;button&gt;&lt;h3&gt;Simular Pago Exitoso&lt;/h3&gt;&lt;/button&gt;
+     */
     public static final Target MOCK_PAYMENT_SUCCESS_BTN =
             Target.the("botón simular pago exitoso")
-                  .locatedBy("[data-testid='mock-payment-success']");
+                  .locatedBy("//button[.//h3[normalize-space()='Simular Pago Exitoso']]");
+
+    /**
+     * Botón para simular un pago rechazado.
+     * HTML real: &lt;button&gt;&lt;h3&gt;Simular Pago Rechazado&lt;/h3&gt;&lt;/button&gt;
+     */
+    public static final Target MOCK_PAYMENT_FAILURE_BTN =
+            Target.the("botón simular pago rechazado")
+                  .locatedBy("//button[.//h3[normalize-space()='Simular Pago Rechazado']]");
 }

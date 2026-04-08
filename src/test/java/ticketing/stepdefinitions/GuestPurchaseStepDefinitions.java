@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import ticketing.navigation.NavigateTo;
 import ticketing.screenplay.questions.SuccessScreen;
 import ticketing.screenplay.tasks.CompletePayment;
@@ -15,6 +16,8 @@ import ticketing.screenplay.tasks.ReserveTicket;
 import ticketing.screenplay.tasks.SelectEvent;
 import ticketing.screenplay.tasks.SelectTier;
 import ticketing.screenplay.ui.ConfirmationPage;
+
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 /**
  * Definiciones de pasos Cucumber para el Guest Happy Path.
@@ -80,6 +83,20 @@ public class GuestPurchaseStepDefinitions {
         );
     }
 
+    /**
+     * El actor hace clic en la tarjeta del evento indicado por su título.
+     * Usa el aria-label "Ver {titulo}" que el frontend asigna a cada tarjeta.
+     *
+     * @param actor  el actor
+     * @param titulo título exacto del evento, ej. "The Phantom's Echo"
+     */
+    @When("{actor} selecciona el evento {string}")
+    public void seleccionaElEvento(Actor actor, String titulo) {
+        actor.attemptsTo(
+                SelectEvent.porTitulo(titulo)
+        );
+    }
+
     // ──────────────────────────────────────────────────────────────────────
     // Selección de tier
     // ──────────────────────────────────────────────────────────────────────
@@ -127,9 +144,27 @@ public class GuestPurchaseStepDefinitions {
      */
     @And("{actor} ingresa su correo {string}")
     public void ingresaSuCorreo(Actor actor, String email) {
+        // Añade timestamp al local-part para garantizar idempotencia entre corridas.
+        // Ej: "marta.guest@example.com" → "marta.guest+20260408073749@example.com"
+        String uniqueEmail = toUniqueEmail(email);
         actor.attemptsTo(
-                EnterEmail.withAddress(email)
+                EnterEmail.withAddress(uniqueEmail)
         );
+    }
+
+    /**
+     * Inserta un sufijo de timestamp (yyyyMMddHHmmss) antes del '@' del email.
+     * Garantiza unicidad en cada corrida sin modificar el dominio.
+     *
+     * @param email email base, ej. "marta.guest@example.com"
+     * @return email único, ej. "marta.guest+20260408073749@example.com"
+     */
+    private static String toUniqueEmail(String email) {
+        String ts = new java.text.SimpleDateFormat("yyyyMMddHHmmss")
+                .format(new java.util.Date());
+        int at = email.indexOf('@');
+        if (at < 0) return email + "+" + ts;
+        return email.substring(0, at) + "+" + ts + email.substring(at);
     }
 
     // ──────────────────────────────────────────────────────────────────────
@@ -179,6 +214,8 @@ public class GuestPurchaseStepDefinitions {
     @Then("{actor} debería ver la pantalla de confirmación de compra")
     public void deberiaVerLaConfirmacion(Actor actor) {
         actor.attemptsTo(
+                WaitUntil.the(ConfirmationPage.SUCCESS_TITLE, isVisible())
+                         .forNoMoreThan(10).seconds(),
                 Ensure.that(ConfirmationPage.SUCCESS_TITLE).isDisplayed()
         );
     }

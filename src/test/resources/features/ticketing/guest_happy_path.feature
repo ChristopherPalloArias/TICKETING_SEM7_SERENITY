@@ -18,7 +18,7 @@ Feature: Compra exitosa de entrada como invitado
   @smoke
   Scenario: Invitado completa el flujo de compra exitosamente de principio a fin
     Given que Marta navega a la cartelera de eventos
-    When Marta selecciona el primer evento disponible
+    When Marta selecciona el evento "The Phantom's Echo"
     And Marta elige el tier "GENERAL"
     And Marta reserva su lugar
     And Marta ingresa su correo "marta.guest@example.com"
@@ -28,7 +28,7 @@ Feature: Compra exitosa de entrada como invitado
 
   Scenario Outline: Invitado puede elegir distintos tiers de precio
     Given que Marta navega a la cartelera de eventos
-    When Marta selecciona el primer evento disponible
+    When Marta selecciona el evento "The Phantom's Echo"
     And Marta elige el tier "<tier>"
     And Marta reserva su lugar
     And Marta ingresa su correo "marta.guest@example.com"

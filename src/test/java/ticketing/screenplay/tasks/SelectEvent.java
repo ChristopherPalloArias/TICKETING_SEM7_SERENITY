@@ -9,15 +9,15 @@ import ticketing.screenplay.ui.EventsPage;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 /**
- * Tarea Screenplay: seleccionar el primer evento disponible en la cartelera.
+ * Tarea Screenplay: seleccionar un evento de la cartelera.
  *
- * Hace clic en la primera tarjeta de evento que aparece en /eventos.
- * Usa espera explícita para garantizar que la tarjeta esté visible.
+ * Soporta selección por primer elemento visible y por título exacto.
+ * Usa espera explícita para garantizar que la tarjeta esté visible antes del clic.
  */
 public class SelectEvent {
 
     /**
-     * Devuelve la tarea que selecciona el primer evento de la cartelera.
+     * Selecciona el primer evento visible de la cartelera.
      *
      * @return Performable ejecutable por un actor
      */
@@ -26,6 +26,21 @@ public class SelectEvent {
                 WaitUntil.the(EventsPage.PRIMER_EVENTO, isVisible())
                          .forNoMoreThan(10).seconds(),
                 Click.on(EventsPage.PRIMER_EVENTO)
+        );
+    }
+
+    /**
+     * Selecciona el evento cuyo título visible coincide exactamente con {@code titulo}.
+     * Usa el atributo aria-label="Ver {titulo}" que el frontend asigna a cada tarjeta.
+     *
+     * @param titulo título exacto del evento, ej. "The Phantom's Echo"
+     * @return Performable ejecutable por un actor
+     */
+    public static Performable porTitulo(String titulo) {
+        return Task.where("{0} selecciona el evento '" + titulo + "'",
+                WaitUntil.the(EventsPage.eventoPorTitulo(titulo), isVisible())
+                         .forNoMoreThan(10).seconds(),
+                Click.on(EventsPage.eventoPorTitulo(titulo))
         );
     }
 }

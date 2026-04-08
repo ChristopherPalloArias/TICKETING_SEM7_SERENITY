@@ -8,6 +8,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import ticketing.navigation.NavigateTo;
+import ticketing.screenplay.questions.EventsListScreen;
 import ticketing.screenplay.questions.SuccessScreen;
 import ticketing.screenplay.questions.TicketScreen;
 import ticketing.screenplay.tasks.CompletePayment;
@@ -17,6 +18,7 @@ import ticketing.screenplay.tasks.ReserveTicket;
 import ticketing.screenplay.tasks.SelectEvent;
 import ticketing.screenplay.tasks.SelectTier;
 import ticketing.screenplay.ui.ConfirmationPage;
+import ticketing.screenplay.ui.EventsPage;
 import ticketing.screenplay.ui.FailedPaymentPage;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -324,5 +326,113 @@ public class GuestPurchaseStepDefinitions {
         actor.attemptsTo(
                 Ensure.that(TicketScreen.isAbsent()).isTrue()
         );
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    // Disponibilidad de la cartelera (HU-03)
+    // ──────────────────────────────────────────────────────────────────────
+
+    /**
+     * Valida que la cartelera muestra al menos un evento disponible.
+     *
+     * Usa WaitUntil sobre EventsPage.PRIMER_EVENTO como espera explícita,
+     * luego verifica con EventsListScreen.hasAtLeastOneEvent() que la
+     * colección de tarjetas de evento no está vacía.
+     *
+     * Cobertura: HU-03 – escenario positivo de visibilidad de cartelera.
+     *
+     * @param actor el actor
+     */
+    @Then("{actor} debería ver al menos un evento disponible en la cartelera")
+    public void deberiaVerAlMenosUnEventoEnCartelera(Actor actor) {
+        actor.attemptsTo(
+                WaitUntil.the(EventsPage.PRIMER_EVENTO, isVisible())
+                         .forNoMoreThan(10).seconds(),
+                Ensure.that(EventsListScreen.hasAtLeastOneEvent()).isTrue(),
+                Ensure.that(EventsListScreen.visibleEventCount()).isGreaterThan(0)
+        );
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    // @wip – Stubs pendientes de datos controlados (HU-03)
+    // ──────────────────────────────────────────────────────────────────────
+    // Estos steps NO se ejecutan en el build estándar porque los escenarios
+    // que los referencian llevan la etiqueta @wip, filtrada por defecto en
+    // junit-platform.properties.
+    //
+    // Para activarlos cuando los datos estén disponibles:
+    //   mvn clean test -Dcucumber.filter.tags="@wip"
+    // ──────────────────────────────────────────────────────────────────────
+
+    /**
+     * [WIP] Navega al evento que en seed data tiene un tier con stock = 0.
+     *
+     * PENDIENTE: Reemplazar el título hardcodeado por el nombre real del
+     * evento con tier agotado una vez que el seed data esté controlado.
+     * Auditar el DOM para identificar el selector del estado "agotado".
+     *
+     * @param actor el actor
+     */
+    @When("{actor} selecciona el evento que tiene un tier agotado")
+    public void seleccionaElEventoConTierAgotado(Actor actor) {
+        // TODO: reemplazar cuando seed data garantice un evento con stock=0
+        // actor.attemptsTo(SelectEvent.porTitulo("<nombre-evento-agotado>"));
+        actor.remember("wip", "tier-agotado");
+    }
+
+    /**
+     * [WIP] Valida que el tier agotado se muestra visualmente como no disponible.
+     *
+     * PENDIENTE: Auditar el DOM del frontend con un evento agotado para determinar
+     * si el estado se renderiza via aria-disabled="true", clase CSS, botón disabled,
+     * o badge de texto. Luego actualizar EventDetailPage con el Target correcto.
+     *
+     * @param actor el actor
+     */
+    @Then("{actor} debería ver ese tier marcado como no disponible")
+    public void deberiaVerElTierMarcadoComoNoDisponible(Actor actor) {
+        // TODO: implementar con selector auditado de estado "agotado"
+        actor.remember("wip", "tier-agotado-visible");
+    }
+
+    /**
+     * [WIP] Valida que el tier agotado no puede ser seleccionado.
+     *
+     * PENDIENTE: Depende del mismo selector que el paso anterior.
+     *
+     * @param actor el actor
+     */
+    @And("{actor} no debería poder seleccionar el tier agotado")
+    public void noDeberiaPoderSeleccionarElTierAgotado(Actor actor) {
+        // TODO: implementar assertion de no-interaccionabilidad
+        actor.remember("wip", "tier-agotado-no-clickeable");
+    }
+
+    /**
+     * [WIP] Navega al evento que en seed data tiene Early Bird con fecha vencida.
+     *
+     * PENDIENTE: Reemplazar por nombre real del evento con early_bird_expiry pasado.
+     * Verificar que el backend/frontend lo marca como inactivo correctamente.
+     *
+     * @param actor el actor
+     */
+    @When("{actor} selecciona el evento con Early Bird vencido")
+    public void seleccionaElEventoConEarlyBirdVencido(Actor actor) {
+        // TODO: reemplazar cuando seed data garantice early_bird_expiry < hoy
+        actor.remember("wip", "early-bird-vencido");
+    }
+
+    /**
+     * [WIP] Valida que el tier Early Bird no aparece activo cuando su fecha venció.
+     *
+     * PENDIENTE: Auditar si el frontend oculta el tier, lo deshabilita o
+     * muestra un badge "Vencido". Actualizar EventDetailPage con el Target.
+     *
+     * @param actor el actor
+     */
+    @Then("{actor} no debería ver el Early Bird como tier activo de compra")
+    public void noDeberiaVerElEarlyBirdComoTierActivo(Actor actor) {
+        // TODO: implementar con selector auditado de estado "vencido"
+        actor.remember("wip", "early-bird-inactivo");
     }
 }

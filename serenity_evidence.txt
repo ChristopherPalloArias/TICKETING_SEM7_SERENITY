@@ -1,0 +1,168 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--------------< [0;36mcom.ticketing.qa:ticketing-serenity-bdd[0;1m >---------------[m
+[[1;34mINFO[m] [1mBuilding Ticketing MVP – Automatización Funcional UI con Serenity BDD + Cucumber 1.0.0-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:2.5:clean[m [1m(default-clean)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Deleting /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:resources[m [1m(default-resources)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] skip non existing resourceDirectory /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/src/main/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:compile[m [1m(default-compile)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:2.6:testResources[m [1m(default-testResources)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Using 'UTF-8' encoding to copy filtered resources.
+[[1;34mINFO[m] Copying 7 resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.8.1:testCompile[m [1m(default-testCompile)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Changes detected - recompiling the module!
+[[1;34mINFO[m] Compiling 20 source files to /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/target/test-classes
+[[1;34mINFO[m] /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/src/test/java/ticketing/screenplay/questions/TierAvailabilityScreen.java: /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/src/test/java/ticketing/screenplay/questions/TierAvailabilityScreen.java uses or overrides a deprecated API.
+[[1;34mINFO[m] /media/christopher/CHRISDDE1/TICKETING_SEM7_SERENITY/src/test/java/ticketing/screenplay/questions/TierAvailabilityScreen.java: Recompile with -Xlint:deprecation for details.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.1.2:test[m [1m(default-test)[m @ [36mticketing-serenity-bdd[0;1m ---[m
+[[1;34mINFO[m] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+abr. 08, 2026 4:08:59 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
+ADVERTENCIA: TestEngine with ID 'junit-platform-suite' encountered a non-critical issue during test discovery:
+
+(1) [WARNING] [cucumber] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead (via @Suite ticketing.CucumberTestSuite).
+[[1;34mINFO[m] Running ticketing.[1mCucumberTestSuite[m
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J(W): Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J(W): Ignoring binding found at [jar:file:/home/christopher/.m2/repository/ch/qos/logback/logback-classic/1.2.10/logback-classic-1.2.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J(W): See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+
+@mvp @event-availability @smoke
+[1mScenario:[22m La cartelera muestra al menos un evento disponible             [90m# classpath:features/ticketing/event_availability.feature:26[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+abr. 08, 2026 4:09:02 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver al menos un evento disponible en la cartelera[39m [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerAlMenosUnEventoEnCartelera(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @event-availability @requires-seed-data
+[1mScenario:[22m Comprador observa un tier agotado como no disponible en pantalla [90m# classpath:features/ticketing/event_availability.feature:31[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m           [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                       [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"BODAS DE SANGRE"[22m[39m                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver el tier [1m"VIP"[22m marcado como no disponible[39m        [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerElTierComoNoDisponible(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m no debería poder seleccionar el tier [1m"VIP"[22m para comprar[39m      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.noDeberiaPoderSeleccionarElTierParaComprar(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+
+@mvp @event-availability @requires-seed-data
+[1mScenario:[22m Comprador no ve el Early Bird como opción de compra activa cuando su período venció [90m# classpath:features/ticketing/event_availability.feature:38[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m                              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                                          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m no debería ver el tier [1m"EARLY_BIRD"[22m disponible para selección[39m                  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.noDeberiaVerElTierDisponibleParaSeleccion(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+
+@mvp @guest-happy-path @smoke
+[1mScenario:[22m Invitado completa el flujo de compra exitosamente de principio a fin [90m# classpath:features/ticketing/guest_happy_path.feature:19[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m               [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+abr. 08, 2026 4:09:05 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                           [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                       [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                                 [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                                           [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m completa el pago simulado exitosamente[39m                           [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.completaElPagoSimulado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de confirmación de compra[39m               [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaConfirmacion(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @guest-happy-path
+[1mScenario Outline:[22m Invitado puede elegir distintos tiers de precio [90m# classpath:features/ticketing/guest_happy_path.feature:41[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"VIP"[22m[39m                                 [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m completa el pago simulado exitosamente[39m              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.completaElPagoSimulado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de confirmación de compra[39m  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaConfirmacion(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @guest-happy-path
+[1mScenario Outline:[22m Invitado puede elegir distintos tiers de precio [90m# classpath:features/ticketing/guest_happy_path.feature:42[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                             [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m completa el pago simulado exitosamente[39m              [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.completaElPagoSimulado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de confirmación de compra[39m  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaConfirmacion(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @payment-failure @smoke
+[1mScenario:[22m Invitado intenta pagar pero el pago es rechazado y el sistema muestra la pantalla de fallo con opción de reintento [90m# classpath:features/ticketing/payment_failure.feature:19[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m                                                             [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+abr. 08, 2026 4:09:16 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                                                                         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                                                                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                                                                        [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                                                                               [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m                                                                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                                                                                         [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m simula un pago rechazado[39m                                                                                       [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.simulaUnPagoRechazado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de pago rechazado[39m                                                                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaPantallaDeRechazo(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m debería ver la opción de reintentar el pago[39m                                                                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaOpcionDeReintentar(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @ticket-visibility @smoke
+[1mScenario:[22m Invitado visualiza el ticket confirmado tras una compra exitosa [90m# classpath:features/ticketing/ticket_visibility.feature:28[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+abr. 08, 2026 4:09:20 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+ADVERTENCIA: Unable to find an exact match for CDP version 147, returning the closest version; found: 145; Please update to a Selenium version that supports CDP version 147
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                     [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                            [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m                 [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m completa el pago simulado exitosamente[39m                      [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.completaElPagoSimulado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver el ticket de compra confirmado[39m                 [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerElTicketConfirmado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m debería ver la información principal del ticket en pantalla[39m [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaInformacionDelTicket(net.serenitybdd.screenplay.Actor)[39m
+
+@mvp @ticket-visibility
+[1mScenario:[22m Invitado con pago rechazado no visualiza el ticket confirmado [90m# classpath:features/ticketing/ticket_visibility.feature:39[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m es un invitado que desea comprar una entrada[39m        [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.esUnInvitado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mGiven [22mque [1mMarta[22m navega a la cartelera de eventos[39m                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.navegaALaCartelera(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mWhen [22m[1mMarta[22m selecciona el evento [1m"The Phantom's Echo"[22m[39m                [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.seleccionaElEvento(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m elige el tier [1m"GENERAL"[22m[39m                                   [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.eligeElTier(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m reserva su lugar[39m                                          [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.reservaSuLugar(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m ingresa su correo [1m"marta.guest@example.com"[22m[39m               [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.ingresaSuCorreo(net.serenitybdd.screenplay.Actor,java.lang.String)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m continúa hacia el pago[39m                                    [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.continuaHaciaElPago(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m simula un pago rechazado[39m                                  [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.simulaUnPagoRechazado(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mThen [22m[1mMarta[22m debería ver la pantalla de pago rechazado[39m                [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.deberiaVerLaPantallaDeRechazo(net.serenitybdd.screenplay.Actor)[39m
+  [32m✔[39m [32m[1mAnd [22m[1mMarta[22m no debería ver ningún ticket confirmado[39m                   [90m# ticketing.stepdefinitions.GuestPurchaseStepDefinitions.noDeberiaVerNingunTicketConfirmado(net.serenitybdd.screenplay.Actor)[39m
+abr. 08, 2026 4:09:29 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
+ADVERTENCIA: TestEngine with ID 'cucumber' encountered a non-critical issue during test discovery:
+
+(1) [WARNING] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m9[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.05 s -- in ticketing.[1mCucumberTestSuite[m
+abr. 08, 2026 4:09:29 P. M. org.junit.platform.launcher.core.DiscoveryIssueNotifier logIssues
+ADVERTENCIA: TestEngine with ID 'junit-platform-suite' encountered a non-critical issue during test discovery:
+
+(1) [WARNING] [cucumber] The classpath resource selector 'features' should not be used to select features in a package. Use the package selector with 'features' instead (via @Suite ticketing.CucumberTestSuite).
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 9, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  32.375 s
+[[1;34mINFO[m] Finished at: 2026-04-08T16:09:29-05:00
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[0m[0m
